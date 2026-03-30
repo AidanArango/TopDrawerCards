@@ -2,62 +2,335 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Top Drawer Cards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Drawer Cards | Premium Soccer Trading Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-  <h1>Top Drawer Cards</h1>
-  <p>Premium Soccer Card Collection</p>
-</header>
-
-<nav>
-  <a href="#collection">Collection</a>
-  <a href="#shop">Shop</a>
-  <a href="#instagram">Instagram</a>
-  <a href="#supplies">Supplies</a>
+<!-- ========== NAVIGATION ========== -->
+<nav id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <span class="logo-ball">⚽</span>
+      <span class="logo-text">TOP DRAWER <span class="logo-accent">CARDS</span></span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#instagram">Follow</a></li>
+      <li><a href="#supplies">Supplies</a></li>
+      <li><a href="#shop" class="nav-cta">Buy Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
 </nav>
 
+<!-- ========== HERO ========== -->
 <section id="hero">
-  <h2>Welcome to My Collection</h2>
-  <p>Modern & vintage soccer cards, graded gems, and rare finds.</p>
+  <div class="hero-bg">
+    <div class="pitch-grid"></div>
+    <div class="pitch-center"></div>
+    <div class="glow glow-gold"></div>
+    <div class="glow glow-blue"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">&#9917; PREMIUM COLLECTION</div>
+    <h1 class="hero-title">
+      <span class="title-top">TOP DRAWER</span>
+      <span class="title-bottom">CARDS</span>
+    </h1>
+    <p class="hero-sub">Modern &amp; vintage soccer cards &middot; Graded gems &middot; Rare finds</p>
+    <div class="hero-ctas">
+      <a href="#collection" class="btn btn-primary">View Collection</a>
+      <a href="#shop" class="btn btn-outline">Shop Cards</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num">500+</span>
+        <span class="stat-lbl">Cards Listed</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="hero-stat">
+        <span class="stat-num">PSA 10</span>
+        <span class="stat-lbl">Graded Gems</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="hero-stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-lbl">Authentic</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-cards">
+    <!-- Card 1 -->
+    <div class="hero-card hc-1">
+      <div class="hc-inner hc-holo">
+        <div class="hc-num">#10</div>
+        <div class="hc-art">
+          <div class="player-silhouette"></div>
+        </div>
+        <div class="hc-foot">
+          <div class="hc-name">MESSI</div>
+          <div class="hc-team">INTER MIAMI</div>
+          <div class="hc-serial">AUTO 01/25</div>
+        </div>
+        <div class="hc-shine"></div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="hero-card hc-2">
+      <div class="hc-inner hc-gold">
+        <div class="hc-num">#7</div>
+        <div class="hc-art">
+          <div class="player-silhouette"></div>
+        </div>
+        <div class="hc-foot">
+          <div class="hc-name">RONALDO</div>
+          <div class="hc-team">AL NASSR</div>
+          <div class="hc-serial">PSA 10</div>
+        </div>
+        <div class="hc-shine"></div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="hero-card hc-3">
+      <div class="hc-inner hc-blue">
+        <div class="hc-num">#9</div>
+        <div class="hc-art">
+          <div class="player-silhouette"></div>
+        </div>
+        <div class="hc-foot">
+          <div class="hc-name">HAALAND</div>
+          <div class="hc-team">MAN CITY</div>
+          <div class="hc-serial">RC /99</div>
+        </div>
+        <div class="hc-shine"></div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#collection" class="scroll-down" aria-label="Scroll down">
+    <span class="scroll-arrow"></span>
+  </a>
 </section>
 
+<!-- ========== COLLECTION ========== -->
 <section id="collection">
-  <h2>Featured Cards</h2>
+  <div class="section-head">
+    <div class="sec-badge">FEATURED</div>
+    <h2 class="sec-title">THE COLLECTION</h2>
+    <p class="sec-sub">Hand-picked gems straight from the top drawer</p>
+  </div>
+
   <div class="card-grid">
-    <div class="card">Card 1</div>
-    <div class="card">Card 2</div>
-    <div class="card">Card 3</div>
+
+    <div class="card-item">
+      <div class="flip-card" data-tilt>
+        <div class="flip-inner">
+          <div class="flip-front variant-holo">
+            <div class="fc-stripe"></div>
+            <div class="fc-body">
+              <div class="fc-num">#10</div>
+              <div class="player-placeholder"></div>
+            </div>
+            <div class="fc-foot">
+              <div class="fc-name">PLAYER NAME</div>
+              <div class="fc-team">TEAM &middot; YEAR</div>
+              <div class="fc-serial">AUTO /25</div>
+            </div>
+            <div class="fc-shine"></div>
+          </div>
+          <div class="flip-back">
+            <div class="fb-logo">TOP DRAWER CARDS</div>
+            <div class="fb-stats">
+              <div class="fb-row"><span>CONDITION</span><span class="fb-val">MINT</span></div>
+              <div class="fb-row"><span>GRADE</span><span class="fb-val">PSA 10</span></div>
+              <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">/25</span></div>
+              <div class="fb-row"><span>YEAR</span><span class="fb-val">2024</span></div>
+            </div>
+            <a href="#shop" class="fc-buy">View on eBay &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="ci-label">
+        <span class="ci-badge">AUTO /25</span>
+        <span class="ci-name">Add Player Name</span>
+      </div>
+    </div>
+
+    <div class="card-item">
+      <div class="flip-card" data-tilt>
+        <div class="flip-inner">
+          <div class="flip-front variant-gold">
+            <div class="fc-stripe"></div>
+            <div class="fc-body">
+              <div class="fc-num">#7</div>
+              <div class="player-placeholder"></div>
+            </div>
+            <div class="fc-foot">
+              <div class="fc-name">PLAYER NAME</div>
+              <div class="fc-team">TEAM &middot; YEAR</div>
+              <div class="fc-serial">PSA 10</div>
+            </div>
+            <div class="fc-shine"></div>
+          </div>
+          <div class="flip-back">
+            <div class="fb-logo">TOP DRAWER CARDS</div>
+            <div class="fb-stats">
+              <div class="fb-row"><span>CONDITION</span><span class="fb-val">GEM MINT</span></div>
+              <div class="fb-row"><span>GRADE</span><span class="fb-val">PSA 10</span></div>
+              <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">BASE</span></div>
+              <div class="fb-row"><span>YEAR</span><span class="fb-val">2023</span></div>
+            </div>
+            <a href="#shop" class="fc-buy">View on eBay &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="ci-label">
+        <span class="ci-badge badge-psa">PSA 10</span>
+        <span class="ci-name">Add Player Name</span>
+      </div>
+    </div>
+
+    <div class="card-item">
+      <div class="flip-card" data-tilt>
+        <div class="flip-inner">
+          <div class="flip-front variant-blue">
+            <div class="fc-stripe"></div>
+            <div class="fc-body">
+              <div class="fc-num">#9</div>
+              <div class="player-placeholder"></div>
+            </div>
+            <div class="fc-foot">
+              <div class="fc-name">PLAYER NAME</div>
+              <div class="fc-team">TEAM &middot; YEAR</div>
+              <div class="fc-serial">RC /99</div>
+            </div>
+            <div class="fc-shine"></div>
+          </div>
+          <div class="flip-back">
+            <div class="fb-logo">TOP DRAWER CARDS</div>
+            <div class="fb-stats">
+              <div class="fb-row"><span>CONDITION</span><span class="fb-val">NM-MT</span></div>
+              <div class="fb-row"><span>GRADE</span><span class="fb-val">RAW</span></div>
+              <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">/99</span></div>
+              <div class="fb-row"><span>YEAR</span><span class="fb-val">2022</span></div>
+            </div>
+            <a href="#shop" class="fc-buy">View on eBay &rarr;</a>
+          </div>
+        </div>
+      </div>
+      <div class="ci-label">
+        <span class="ci-badge badge-rc">RC</span>
+        <span class="ci-name">Add Player Name</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
+<!-- ========== SHOP ========== -->
 <section id="shop">
-  <h2>Shop My Cards</h2>
-  <a href="#" target="_blank">Visit My eBay Store</a>
+  <div class="shop-wrap">
+    <div class="shop-text">
+      <div class="sec-badge">MARKETPLACE</div>
+      <h2 class="sec-title">SHOP THE VAULT</h2>
+      <p>Browse the full collection on eBay. New cards listed daily &mdash; autos, rookies, graded slabs, and vintage rarities from around the world.</p>
+      <ul class="shop-features">
+        <li><span class="sf-icon">&#127942;</span> Authenticated Cards</li>
+        <li><span class="sf-icon">&#128230;</span> Fast Secure Shipping</li>
+        <li><span class="sf-icon">&#11088;</span> Top Rated Seller</li>
+      </ul>
+      <a href="#" target="_blank" class="btn btn-primary btn-lg">Visit eBay Store &rarr;</a>
+    </div>
+    <div class="shop-visual">
+      <div class="card-stack">
+        <div class="cs-card cs-3"></div>
+        <div class="cs-card cs-2"></div>
+        <div class="cs-card cs-1">
+          <span class="cs-tag">NEW ARRIVALS</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ========== INSTAGRAM ========== -->
 <section id="instagram">
-  <h2>Follow Me</h2>
-  <a href="#" target="_blank">Instagram Page</a>
+  <div class="section-head">
+    <div class="sec-badge">SOCIAL</div>
+    <h2 class="sec-title">FOLLOW THE PULL</h2>
+    <p class="sec-sub">Pack breaks, PC updates &amp; rare finds &mdash; on the 'gram daily</p>
+  </div>
+  <div class="ig-grid">
+    <div class="ig-post ig-1"><div class="ig-overlay"><span>Pack Break</span></div></div>
+    <div class="ig-post ig-2"><div class="ig-overlay"><span>PC Update</span></div></div>
+    <div class="ig-post ig-3"><div class="ig-overlay"><span>Rare Pull</span></div></div>
+    <div class="ig-post ig-4"><div class="ig-overlay"><span>Graded Slab</span></div></div>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    <a href="#" target="_blank" class="btn btn-instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @topdrawercards
+    </a>
+  </div>
 </section>
 
+<!-- ========== SUPPLIES ========== -->
 <section id="supplies">
-  <h2>Supplies I Use</h2>
-  <ul>
-    <li>Toploaders</li>
-    <li>Sleeves</li>
-    <li>Storage Boxes</li>
-  </ul>
+  <div class="section-head">
+    <div class="sec-badge">GEAR UP</div>
+    <h2 class="sec-title">SUPPLIES I USE</h2>
+    <p class="sec-sub">The essentials for keeping cards in gem condition</p>
+  </div>
+  <div class="supplies-grid">
+    <div class="supply-card">
+      <div class="supply-icon">&#128203;</div>
+      <div class="supply-name">Toploaders</div>
+      <div class="supply-desc">Rigid protection for slabs and raw cards. Don't skip these.</div>
+    </div>
+    <div class="supply-card">
+      <div class="supply-icon">&#128737;&#65039;</div>
+      <div class="supply-name">Card Sleeves</div>
+      <div class="supply-desc">Penny sleeves and perfect fit for every card in the binder.</div>
+    </div>
+    <div class="supply-card">
+      <div class="supply-icon">&#128230;</div>
+      <div class="supply-name">Storage Boxes</div>
+      <div class="supply-desc">Long-term storage built for serious PC collectors.</div>
+    </div>
+    <div class="supply-card">
+      <div class="supply-icon">&#128269;</div>
+      <div class="supply-name">Magnifier Loupe</div>
+      <div class="supply-desc">Spot print defects before they cost you a grade point.</div>
+    </div>
+  </div>
 </section>
 
+<!-- ========== FOOTER ========== -->
 <footer>
-  <p>© 2026 Top Drawer Cards</p>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="logo-ball">&#9917;</span>
+      <span class="logo-text">TOP DRAWER <span class="logo-accent">CARDS</span></span>
+    </div>
+    <p class="footer-tag">Premium Soccer Card Collection &middot; Est. 2024</p>
+    <nav class="footer-links">
+      <a href="#collection">Collection</a>
+      <a href="#shop">Shop</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#supplies">Supplies</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Top Drawer Cards &middot; All cards authentic &middot; No fakes, no fools</p>
+  </div>
 </footer>
 
 <script src="script.js"></script>
-
 </body>
 </html>
