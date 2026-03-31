@@ -61,49 +61,68 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
   });
 });
 
+// ── Instagram Configuration ──
+// Add your Meta access token and Instagram User ID below
+const INSTAGRAM_CONFIG = {
+  accessToken: 'YOUR_ACCESS_TOKEN_HERE', // Get from: https://developers.facebook.com/apps/
+  instagramUserId: 'YOUR_INSTAGRAM_USER_ID_HERE', // Get from: https://www.instagram.com/graph/ig-user-id/
+  username: 'topdrawercards'
+};
+
 // ── Load Instagram Posts ──
 async function loadInstagramPosts() {
   const igGrid = document.getElementById('ig-grid');
   
-  // Create styled Instagram post placeholders
-  const postsData = [
-    { 
-      label: 'Latest Post', 
-      icon: '📸',
-      url: 'https://www.instagram.com/topdrawercards/' 
-    },
-    { 
-      label: 'Pack Break', 
-      icon: '🎁',
-      url: 'https://www.instagram.com/topdrawercards/' 
-    },
-    { 
-      label: 'Rare Pull', 
-      icon: '⭐',
-      url: 'https://www.instagram.com/topdrawercards/' 
-    },
-    { 
-      label: 'Graded Gem', 
-      icon: '💎',
-      url: 'https://www.instagram.com/topdrawercards/' 
-    }
-  ];
+  // Show loading state
+  igGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted);">Loading instagram posts...</p>';
   
-  igGrid.innerHTML = postsData.map((post, i) => `
-    <a href="${post.url}" target="_blank" rel="noopener" class="ig-post fade-up" title="Go to ${post.label} on Instagram">
-      <div class="ig-content">
-        <span class="ig-icon">${post.icon}</span>
-      </div>
-      <div class="ig-overlay">
-        <div class="ig-logo">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
-          </svg>
+  try {
+    // If token not configured, show setup message
+    if (INSTAGRAM_CONFIG.accessToken === 'YOUR_ACCESS_TOKEN_HERE') {
+      igGrid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 20px;">
+          <p>Instagram feed not yet configured.</p>
+          <p style="font-size: 14px; margin-top: 10px;">Add your access token to the script to display posts.</p>
         </div>
-        <span>${post.label}</span>
+      `;
+      return;
+    }
+    
+    // Fetch media from Instagram API
+    const response = await fetch(
+      `https://graph.instagram.com/v18.0/${INSTAGRAM_CONFIG.instagramUserId}/media?fields=id,caption,media_type,media_url,permalink,timestamp&limit=4&access_token=${INSTAGRAM_CONFIG.accessToken}`
+    );
+    
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (!data.data || data.data.length === 0) {
+      igGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted);">No posts found.</p>';
+      return;
+    }
+    
+    // Render posts
+    igGrid.innerHTML = data.data.slice(0, 4).map((post) => `
+      <a href="${post.permalink}" target="_blank" rel="noopener" class="ig-post fade-up" title="${post.caption || 'View on Instagram'}">
+        ${post.media_type === 'IMAGE' ? `<img src="${post.media_url}" alt="${post.caption || 'Instagram post'}" style="width: 100%; height: 100%; object-fit: cover;">` : `<video src="${post.media_url}" style="width: 100%; height: 100%; object-fit: cover;"></video>`}
+        <div class="ig-overlay">
+          <span style="font-size: 14px; text-align: center; word-wrap: break-word; max-width: 90%;">${post.caption ? post.caption.substring(0, 30) + '...' : 'View Post'}</span>
+        </div>
+      </a>
+    `).join('');
+    
+  } catch (error) {
+    console.error('Instagram feed error:', error);
+    igGrid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 20px;">
+        <p>Unable to load Instagram posts.</p>
+        <p style="font-size: 12px; margin-top: 10px;"><a href="https://www.instagram.com/${INSTAGRAM_CONFIG.username}/" target="_blank" style="color: var(--primary);">Visit profile →</a></p>
       </div>
-    </a>
-  `).join('');
+    `;
+  }
 }
 
 // Load posts when DOM is ready
