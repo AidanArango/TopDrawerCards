@@ -925,9 +925,9 @@ section { padding: 100px 24px; }
 
 .ig-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  max-width: 1000px;
+  max-width: 500px;
   margin: 0 auto 0;
 }
 
