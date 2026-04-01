@@ -349,8 +349,8 @@ section { padding: 100px 24px; }
 .title-bottom {
   display: block;
   font-size: clamp(3.5rem, 8vw, 6.5rem);
-  color: var(--primary);
-  -webkit-text-stroke: 1px var(--primary-dark);
+  color: var(--blue);
+  -webkit-text-stroke: 1px var(--blue-dark);
 }
 
 .hero-sub {
