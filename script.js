@@ -62,67 +62,51 @@ document.querySelectorAll('[data-tilt]').forEach(card => {
 });
 
 // ── Instagram Configuration ──
-// Add your Meta access token and Instagram User ID below
-const INSTAGRAM_CONFIG = {
-  accessToken: 'YOUR_ACCESS_TOKEN_HERE', // Get from: https://developers.facebook.com/apps/
-  instagramUserId: 'YOUR_INSTAGRAM_USER_ID_HERE', // Get from: https://www.instagram.com/graph/ig-user-id/
-  username: 'topdrawercards'
-};
+// Simply paste your 4 most recent Instagram post image URLs below
+// To get image URLs:
+// 1. Go to https://www.instagram.com/topdrawercards/
+// 2. Right-click each post image → "Copy image link"
+// 3. Paste the URL in the array below
+const INSTAGRAM_POSTS = [
+  {
+    image: 'https://www.instagram.com/p/DMawungJWGF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', // ← PASTE IMAGE URL HERE
+    caption: 'Post 1'
+  },
+  {
+    image: 'https://www.instagram.com/p/DQ9xSVij5lz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', // ← PASTE IMAGE URL HERE
+    caption: 'Post 2'
+  },
+  {
+    image: 'https://www.instagram.com/p/DTG3VkgkhjW/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', // ← PASTE IMAGE URL HERE
+    caption: 'Post 3'
+  },
+  {
+    image: 'https://www.instagram.com/p/DTgAyitgd56/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', // ← PASTE IMAGE URL HERE
+    caption: 'Post 4'
+  }
+];
 
 // ── Load Instagram Posts ──
-async function loadInstagramPosts() {
+function loadInstagramPosts() {
   const igGrid = document.getElementById('ig-grid');
+  igGrid.innerHTML = ''; // Clear loading state
   
-  // Show loading state
-  igGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted);">Loading instagram posts...</p>';
-  
-  try {
-    // If token not configured, show setup message
-    if (INSTAGRAM_CONFIG.accessToken === 'YOUR_ACCESS_TOKEN_HERE') {
-      igGrid.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 20px;">
-          <p>Instagram feed not yet configured.</p>
-          <p style="font-size: 14px; margin-top: 10px;">Add your access token to the script to display posts.</p>
-        </div>
-      `;
-      return;
-    }
+  INSTAGRAM_POSTS.forEach(post => {
+    const postEl = document.createElement('a');
+    postEl.href = 'https://www.instagram.com/topdrawercards/';
+    postEl.target = '_blank';
+    postEl.className = 'ig-post';
+    postEl.style.backgroundImage = `url('${post.image}')`;
+    postEl.style.backgroundSize = 'cover';
+    postEl.style.backgroundPosition = 'center';
     
-    // Fetch media from Instagram API
-    const response = await fetch(
-      `https://graph.instagram.com/v18.0/${INSTAGRAM_CONFIG.instagramUserId}/media?fields=id,caption,media_type,media_url,permalink,timestamp&limit=4&access_token=${INSTAGRAM_CONFIG.accessToken}`
-    );
+    const overlay = document.createElement('div');
+    overlay.className = 'ig-overlay';
+    overlay.textContent = post.caption;
     
-    if (!response.ok) {
-      throw new Error(`API Error: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    
-    if (!data.data || data.data.length === 0) {
-      igGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--muted);">No posts found.</p>';
-      return;
-    }
-    
-    // Render posts
-    igGrid.innerHTML = data.data.slice(0, 4).map((post) => `
-      <a href="${post.permalink}" target="_blank" rel="noopener" class="ig-post fade-up" title="${post.caption || 'View on Instagram'}">
-        ${post.media_type === 'IMAGE' ? `<img src="${post.media_url}" alt="${post.caption || 'Instagram post'}" style="width: 100%; height: 100%; object-fit: cover;">` : `<video src="${post.media_url}" style="width: 100%; height: 100%; object-fit: cover;"></video>`}
-        <div class="ig-overlay">
-          <span style="font-size: 14px; text-align: center; word-wrap: break-word; max-width: 90%;">${post.caption ? post.caption.substring(0, 30) + '...' : 'View Post'}</span>
-        </div>
-      </a>
-    `).join('');
-    
-  } catch (error) {
-    console.error('Instagram feed error:', error);
-    igGrid.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 20px;">
-        <p>Unable to load Instagram posts.</p>
-        <p style="font-size: 12px; margin-top: 10px;"><a href="https://www.instagram.com/${INSTAGRAM_CONFIG.username}/" target="_blank" style="color: var(--primary);">Visit profile →</a></p>
-      </div>
-    `;
-  }
+    postEl.appendChild(overlay);
+    igGrid.appendChild(postEl);
+  });
 }
 
 // Load posts when DOM is ready
