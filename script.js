@@ -73,7 +73,7 @@ const INSTAGRAM_POSTS = [
     caption: 'Post 1'
   },
   {
-    image: 'https://scontent-lax3-1.cdninstagram.com/v/t51.82787-15/521656680_18035267732678558_6476080717789847994_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ig_cache_key=MzY4MjQ2OTk0NDk4MDk0NDExMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjEwODB4MTM0Ni5zZHIuQzMifQ%3D%3D&_nc_ohc=ZsT8GuMm61oQ7kNvwG_EDuM&_nc_oc=Adps9jJkRPSXUd9aTDgrKZQcYmjZZYv5U0ORmdvAOO5Rm8qYpsr7MS62GH3XwXfDH4c&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lax3-1.cdninstagram.com&_nc_gid=OqdaNsosfUcCjKZDtxInPQ&_nc_ss=7a32e&oh=00_Af2kRluzysEGpix90QcfuBuQPGrkAzqHRhrSQcxA5E-EjQ&oe=69D32C93', // ← PASTE IMAGE URL HERE
+    image: 'https://scontent-lax3-2.cdninstagram.com/v/t51.82787-15/580866020_18048872111678558_4082195663215850759_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzc2NDM4MTYyNzkwOTY0MjYxMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjEzNDd4MTY3OS5zZHIuQzMifQ%3D%3D&_nc_ohc=9LGZ2f8vmWcQ7kNvwHTv85g&_nc_oc=AdpHldHAAfysYDksoE-OhkZ-K7HIN2ayEIDfp7nU3gRpiqDjdQxLz-5rQdF2hsUEitc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lax3-2.cdninstagram.com&_nc_gid=-WqYnwb-Z2tYxsQNBTcZsg&_nc_ss=7a32e&oh=00_Af3a5SRH4GHkfrBNue_MILgzHWCBeYfrSz2dHhTYImtUaQ&oe=69D3200A', // ← PASTE IMAGE URL HERE
     caption: 'Post 2'
   },
   {
