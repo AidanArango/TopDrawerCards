@@ -322,35 +322,18 @@
     filteredCards.forEach(card => {
       const cardHTML = `
         <div class="card-item">
-          <div class="flip-card" data-tilt>
-            <div class="flip-inner">
-              <div class="flip-front ${card.variant}">
-                <div class="fc-stripe"></div>
-                <div class="fc-body">
-                  <div class="fc-num">${card.number}</div>
-                  <div class="player-placeholder"></div>
-                </div>
-                <div class="fc-foot">
-                  <div class="fc-name">${card.playerName}</div>
-                  <div class="fc-team">${card.team} &middot; ${card.year}</div>
-                  <div class="fc-serial">${card.badge}</div>
-                </div>
-                <div class="fc-shine"></div>
-              </div>
-              <div class="flip-back">
-                <div class="fb-logo">TOP DRAWER CARDS</div>
-                <div class="fb-stats">
-                  <div class="fb-row"><span>CONDITION</span><span class="fb-val">${card.condition}</span></div>
-                  <div class="fb-row"><span>GRADE</span><span class="fb-val">${card.grade}</span></div>
-                  <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">${card.printRun}</span></div>
-                  <div class="fb-row"><span>YEAR</span><span class="fb-val">${card.year}</span></div>
-                </div>
-                <a href="#" class="fc-buy">View on eBay &rarr;</a>
-              </div>
+          <div class="card-front ${card.variant}">
+            <div class="fc-stripe"></div>
+            <div class="fc-body">
+              <div class="fc-num">${card.number}</div>
+              <div class="player-placeholder"></div>
             </div>
-          </div>
-          <div class="ci-label">
-            <span class="ci-badge ${card.badgeClass}">${card.badge}</span>
+            <div class="fc-foot">
+              <div class="fc-name">${card.playerName}</div>
+              <div class="fc-team">${card.team} &middot; ${card.year}</div>
+              <div class="fc-serial">${card.badge}</div>
+            </div>
+            <div class="fc-shine"></div>
             <span class="ci-name">${card.playerName}</span>
           </div>
         </div>
@@ -358,30 +341,11 @@
       cardsGrid.innerHTML += cardHTML;
     });
 
-    // Re-apply tilt effect to new cards
-    addTiltEffect();
-
     // Re-apply fade animations to new cards
     const newCards = cardsGrid.querySelectorAll('.card-item');
     newCards.forEach(card => {
       card.classList.add('fade-up');
       card.classList.add('visible');
-    });
-  }
-
-  // Add tilt effect to cards
-  function addTiltEffect() {
-    document.querySelectorAll('[data-tilt]').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(700px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.04)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
     });
   }
 
