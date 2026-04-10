@@ -190,6 +190,12 @@ section { padding: 100px 24px; }
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.nav-logo:hover {
+  opacity: 0.8;
 }
 
 .logo-ball { font-size: 1.4rem; }
@@ -579,6 +585,59 @@ section { padding: 100px 24px; }
 ═══════════════════════════════════════════ */
 #collection {
   background: var(--surface);
+}
+
+/* Collection page link - make entire section clickable */
+.collection-section {
+  cursor: pointer;
+}
+
+.collection-link {
+  display: block;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.collection-link:hover {
+  opacity: 0.95;
+  transform: scale(1.01);
+}
+
+/* Category filter buttons */
+.category-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 50px;
+}
+
+.filter-btn {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 2px solid rgba(255,255,255,.2);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--text);
+  background: rgba(187,37,51,.1);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-primary);
 }
 
 .card-grid {

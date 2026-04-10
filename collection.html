@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collection | Top Drawer Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="images/Top Drawer.png" alt="Top Drawer Cards Logo" class="nav-logo-img">
+      <span class="logo-text">TOP DRAWER <span class="logo-accent">CARDS</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="collection.html">Collection</a></li>
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="index.html#instagram">Follow</a></li>
+      <li><a href="index.html#supplies">Supplies</a></li>
+      <li><a href="index.html#shop" class="nav-cta">Buy Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ========== COLLECTION PAGE ========== -->
+<section id="collection-page" style="padding-top: 140px;">
+  <div class="section-head">
+    <div class="sec-badge">FEATURED</div>
+    <h2 class="sec-title">THE COLLECTION</h2>
+    <p class="sec-sub">Browse by category to find your perfect card</p>
+  </div>
+
+  <!-- Category Filter Buttons -->
+  <div class="category-filter">
+    <button class="filter-btn active" data-category="all">All Categories</button>
+    <button class="filter-btn" data-category="mens-soccer">Men's Soccer</button>
+    <button class="filter-btn" data-category="womens-soccer">Women's Soccer</button>
+    <button class="filter-btn" data-category="other-sports">Other Sports</button>
+    <button class="filter-btn" data-category="tcg">TCG</button>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="card-grid" id="cardsGrid">
+    <!-- Cards will be loaded here by JavaScript -->
+  </div>
+
+  <!-- Back to Home -->
+  <div style="text-align: center; margin-top: 60px;">
+    <a href="index.html" class="btn btn-outline">← Back to Home</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer style="background: rgba(0,0,0,.3); padding: 40px 24px; text-align: center; border-top: 1px solid var(--border);">
+  <p style="color: var(--muted); font-size: 0.9rem;">© 2026 Top Drawer Cards. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Collection data for all categories
+  const collectionData = [
+    // Men's Soccer
+    {
+      id: 1,
+      category: 'mens-soccer',
+      number: '#10',
+      playerName: 'Alphonso Davies',
+      team: 'Bayern Munich',
+      year: '2024',
+      variant: 'variant-holo',
+      badge: 'AUTO /25',
+      badgeClass: '',
+      condition: 'MINT',
+      grade: 'PSA 10',
+      printRun: '/25'
+    },
+    {
+      id: 2,
+      category: 'mens-soccer',
+      number: '#7',
+      playerName: 'Cristiano Ronaldo',
+      team: 'Al Nassr',
+      year: '2023',
+      variant: 'variant-gold',
+      badge: 'PSA 10',
+      badgeClass: 'badge-psa',
+      condition: 'GEM MINT',
+      grade: 'PSA 10',
+      printRun: 'BASE'
+    },
+    {
+      id: 3,
+      category: 'mens-soccer',
+      number: '#9',
+      playerName: 'Erling Haaland',
+      team: 'Man City',
+      year: '2022',
+      variant: 'variant-blue',
+      badge: 'RC',
+      badgeClass: 'badge-rc',
+      condition: 'NM-MT',
+      grade: 'RAW',
+      printRun: '/99'
+    },
+    {
+      id: 4,
+      category: 'mens-soccer',
+      number: '#15',
+      playerName: 'Kylian Mbappé',
+      team: 'PSG',
+      year: '2023',
+      variant: 'variant-holo',
+      badge: 'PSA 9',
+      badgeClass: 'badge-psa',
+      condition: 'MINT',
+      grade: 'PSA 9',
+      printRun: '/50'
+    },
+    {
+      id: 5,
+      category: 'mens-soccer',
+      number: '#6',
+      playerName: 'Vinícius Júnior',
+      team: 'Real Madrid',
+      year: '2024',
+      variant: 'variant-blue',
+      badge: 'PSA 10',
+      badgeClass: 'badge-psa',
+      condition: 'GEM MINT',
+      grade: 'PSA 10',
+      printRun: 'BASE'
+    },
+    // Women's Soccer
+    {
+      id: 6,
+      category: 'womens-soccer',
+      number: '#11',
+      playerName: 'Sam Kerr',
+      team: 'Chelsea',
+      year: '2024',
+      variant: 'variant-gold',
+      badge: 'PSA 9',
+      badgeClass: 'badge-psa',
+      condition: 'NM-MT',
+      grade: 'PSA 9',
+      printRun: '/75'
+    },
+    {
+      id: 7,
+      category: 'womens-soccer',
+      number: '#14',
+      playerName: 'Alex Morgan',
+      team: 'USWNT',
+      year: '2023',
+      variant: 'variant-holo',
+      badge: 'RC /99',
+      badgeClass: '',
+      condition: 'NM-MT',
+      grade: 'RAW',
+      printRun: '/99'
+    },
+    {
+      id: 8,
+      category: 'womens-soccer',
+      number: '#8',
+      playerName: 'Mia Hamm',
+      team: 'Legend',
+      year: '2020',
+      variant: 'variant-blue',
+      badge: 'PSA 8',
+      badgeClass: 'badge-psa',
+      condition: 'NM',
+      grade: 'PSA 8',
+      printRun: '/10'
+    },
+    {
+      id: 9,
+      category: 'womens-soccer',
+      number: '#9',
+      playerName: 'Megan Rapinoe',
+      team: 'USWNT',
+      year: '2023',
+      variant: 'variant-gold',
+      badge: 'PSA 9',
+      badgeClass: 'badge-psa',
+      condition: 'MINT',
+      grade: 'PSA 9',
+      printRun: '/50'
+    },
+    // Other Sports
+    {
+      id: 10,
+      category: 'other-sports',
+      number: '#23',
+      playerName: 'LeBron James',
+      team: 'Lakers',
+      year: '2022',
+      variant: 'variant-holo',
+      badge: 'PSA 10',
+      badgeClass: 'badge-psa',
+      condition: 'GEM MINT',
+      grade: 'PSA 10',
+      printRun: '/25'
+    },
+    {
+      id: 11,
+      category: 'other-sports',
+      number: '#10',
+      playerName: 'Lionel Messi',
+      team: 'Inter Miami',
+      year: '2024',
+      variant: 'variant-gold',
+      badge: 'AUTO /10',
+      badgeClass: '',
+      condition: 'MINT',
+      grade: 'PSA 10',
+      printRun: '/10'
+    },
+    {
+      id: 12,
+      category: 'other-sports',
+      number: '#1',
+      playerName: 'Patrick Mahomes',
+      team: 'Chiefs',
+      year: '2023',
+      variant: 'variant-blue',
+      badge: 'RC /99',
+      badgeClass: 'badge-rc',
+      condition: 'NM-MT',
+      grade: 'RAW',
+      printRun: '/99'
+    },
+    {
+      id: 13,
+      category: 'other-sports',
+      number: '#44',
+      playerName: 'Shohei Ohtani',
+      team: 'Dodgers',
+      year: '2024',
+      variant: 'variant-holo',
+      badge: 'PSA 9',
+      badgeClass: 'badge-psa',
+      condition: 'NM-MT',
+      grade: 'PSA 9',
+      printRun: '/75'
+    },
+    // TCG
+    {
+      id: 14,
+      category: 'tcg',
+      number: '#001',
+      playerName: 'Charizard',
+      team: 'Pokémon',
+      year: '1999',
+      variant: 'variant-gold',
+      badge: 'PSA 8',
+      badgeClass: 'badge-psa',
+      condition: 'NM',
+      grade: 'PSA 8',
+      printRun: 'Base Set'
+    },
+    {
+      id: 15,
+      category: 'tcg',
+      number: '#103',
+      playerName: 'Black Lotus',
+      team: 'MTG',
+      year: '1993',
+      variant: 'variant-blue',
+      badge: 'PSA 7',
+      badgeClass: 'badge-psa',
+      condition: 'NM-MT',
+      grade: 'PSA 7',
+      printRun: 'Limited'
+    },
+    {
+      id: 16,
+      category: 'tcg',
+      number: '#25',
+      playerName: 'Blue Eyes',
+      team: 'Yu-Gi-Oh',
+      year: '2002',
+      variant: 'variant-holo',
+      badge: 'RAW',
+      badgeClass: '',
+      condition: 'MINT',
+      grade: 'RAW',
+      printRun: '1st Ed'
+    },
+    {
+      id: 17,
+      category: 'tcg',
+      number: '#001',
+      playerName: 'Pikachu Illustrator',
+      team: 'Pokémon',
+      year: '1998',
+      variant: 'variant-gold',
+      badge: 'PSA 9',
+      badgeClass: 'badge-psa',
+      condition: 'MINT',
+      grade: 'PSA 9',
+      printRun: 'Promo'
+    },
+  ];
+
+  // Render cards function
+  function renderCards(category = 'all') {
+    const cardsGrid = document.getElementById('cardsGrid');
+    cardsGrid.innerHTML = '';
+
+    const filteredCards = category === 'all' 
+      ? collectionData 
+      : collectionData.filter(card => card.category === category);
+
+    filteredCards.forEach(card => {
+      const cardHTML = `
+        <div class="card-item">
+          <div class="flip-card" data-tilt>
+            <div class="flip-inner">
+              <div class="flip-front ${card.variant}">
+                <div class="fc-stripe"></div>
+                <div class="fc-body">
+                  <div class="fc-num">${card.number}</div>
+                  <div class="player-placeholder"></div>
+                </div>
+                <div class="fc-foot">
+                  <div class="fc-name">${card.playerName}</div>
+                  <div class="fc-team">${card.team} &middot; ${card.year}</div>
+                  <div class="fc-serial">${card.badge}</div>
+                </div>
+                <div class="fc-shine"></div>
+              </div>
+              <div class="flip-back">
+                <div class="fb-logo">TOP DRAWER CARDS</div>
+                <div class="fb-stats">
+                  <div class="fb-row"><span>CONDITION</span><span class="fb-val">${card.condition}</span></div>
+                  <div class="fb-row"><span>GRADE</span><span class="fb-val">${card.grade}</span></div>
+                  <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">${card.printRun}</span></div>
+                  <div class="fb-row"><span>YEAR</span><span class="fb-val">${card.year}</span></div>
+                </div>
+                <a href="#" class="fc-buy">View on eBay &rarr;</a>
+              </div>
+            </div>
+          </div>
+          <div class="ci-label">
+            <span class="ci-badge ${card.badgeClass}">${card.badge}</span>
+            <span class="ci-name">${card.playerName}</span>
+          </div>
+        </div>
+      `;
+      cardsGrid.innerHTML += cardHTML;
+    });
+
+    // Re-apply tilt effect to new cards
+    addTiltEffect();
+
+    // Re-apply fade animations to new cards
+    const newCards = cardsGrid.querySelectorAll('.card-item');
+    newCards.forEach(card => {
+      card.classList.add('fade-up');
+      card.classList.add('visible');
+    });
+  }
+
+  // Add tilt effect to cards
+  function addTiltEffect() {
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(700px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.04)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // Filter button functionality
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      btn.classList.add('active');
+      // Render cards for selected category
+      renderCards(btn.dataset.category);
+    });
+  });
+
+  // Initial render
+  renderCards();
+</script>
+
+</body>
+</html>
