@@ -587,6 +587,34 @@ section { padding: 100px 24px; }
   background: var(--surface);
 }
 
+#collection-page {
+  background: var(--surface);
+  padding: 120px 24px 80px !important;
+  min-height: 100vh;
+}
+
+.collection-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.collection-container .section-head {
+  margin-bottom: 80px;
+}
+
+.collection-container .sec-title {
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  letter-spacing: .06em;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.collection-container .sec-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,.5);
+  font-weight: 300;
+}
+
 /* Collection page link - make entire section clickable */
 .collection-section {
   cursor: pointer;
@@ -603,24 +631,36 @@ section { padding: 100px 24px; }
   transform: scale(1.01);
 }
 
+/* Category filter wrapper */
+.category-filter-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
 /* Category filter buttons */
 .category-filter {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 50px;
+  gap: 14px;
+  padding: 24px 32px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .filter-btn {
   font-family: var(--font-heading);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 10px 20px;
-  border: 2px solid rgba(255,255,255,.2);
-  border-radius: var(--radius-sm);
+  padding: 11px 24px;
+  border: 1.5px solid rgba(255,255,255,.12);
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
@@ -630,49 +670,58 @@ section { padding: 100px 24px; }
 .filter-btn:hover {
   border-color: var(--primary);
   color: var(--text);
-  background: rgba(187,37,51,.1);
+  background: rgba(187,37,51,.08);
 }
 
 .filter-btn.active {
   background: var(--primary);
   border-color: var(--primary);
   color: #fff;
-  box-shadow: var(--shadow-primary);
+  box-shadow: 0 8px 24px rgba(187,37,51,.3);
 }
 
+/* Card Grid */
 .card-grid {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 48px 40px;
+  width: 100%;
+  margin-bottom: 60px;
+  animation: fadeInCards 0.6s ease;
+}
+
+@keyframes fadeInCards {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .card-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
+  transition: var(--transition);
 }
 
 /* Card front - simplified for collection page */
 .card-front {
-  width: 180px;
-  height: 252px;
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 5/7;
   display: flex;
   flex-direction: column;
-  padding: 12px 10px 10px;
-  box-shadow: 0 16px 50px rgba(0,0,0,.6);
-  border-radius: 10px;
+  padding: 14px 12px 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  border-radius: 12px;
   overflow: hidden;
-  transition: var(--transition);
-  cursor: default;
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+  position: relative;
 }
 
 .card-front:hover {
-  box-shadow: 0 20px 60px rgba(0,0,0,.8);
-  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,.7);
+  transform: translateY(-6px);
 }
 
 .variant-holo {
@@ -772,40 +821,59 @@ section { padding: 100px 24px; }
 /* Card item label */
 .ci-label {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  width: 100%;
+  text-align: center;
 }
 
 .ci-badge {
   font-family: var(--font-heading);
-  font-size: .65rem;
+  font-size: .7rem;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 4px;
-  background: rgba(187,37,51,.18);
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: rgba(187,37,51,.15);
   color: var(--primary);
-  border: 1px solid rgba(187,37,51,.3);
+  border: 1px solid rgba(187,37,51,.25);
+  transition: var(--transition);
 }
 
 .badge-psa {
-  background: rgba(0,102,178,.18);
+  background: rgba(0,102,178,.15);
   color: var(--blue-light);
-  border-color: rgba(0,102,178,.3);
+  border-color: rgba(0,102,178,.25);
 }
 
 .badge-rc {
-  background: rgba(80,200,80,.18);
+  background: rgba(80,200,80,.15);
   color: #6fe06f;
-  border-color: rgba(80,200,80,.3);
+  border-color: rgba(80,200,80,.25);
 }
 
 .ci-name {
   font-family: var(--font-heading);
-  font-size: .82rem;
+  font-size: .88rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--text);
+  letter-spacing: .05em;
+  transition: var(--transition);
+}
+
+.card-item:hover .ci-name {
+  color: var(--primary);
+}
+
+/* Collection footer */
+.collection-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,.06);
 }
 
 /* ═══════════════════════════════════════════
@@ -1134,6 +1202,8 @@ footer {
   .hero-cards { right: 2%; }
   .shop-wrap { gap: 48px; }
   .supplies-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid { gap: 40px 32px; }
+  .category-filter { gap: 12px; padding: 20px 24px; }
 }
 
 @media (max-width: 860px) {
@@ -1187,12 +1257,20 @@ footer {
 @media (max-width: 560px) {
   section { padding: 72px 18px; }
 
+  #collection-page { padding: 100px 16px 60px !important; }
+  .collection-container { padding: 0 8px; }
+
   .hero-cards { gap: 0; }
   .hc-1 { transform: rotate(-12deg) translateY(20px) scale(.88); }
   .hc-2 { transform: rotate(-3deg) translateX(-10px) scale(.88); }
   .hc-3 { transform: rotate(8deg) translateY(14px) translateX(-20px) scale(.88); }
 
-  .card-grid { gap: 18px; }
+  .card-grid { gap: 28px 20px; }
+  .card-front { max-width: 160px; }
+  .category-filter { gap: 10px; padding: 16px 18px; }
+  .filter-btn { padding: 9px 18px; font-size: 0.78rem; }
+  .category-filter-wrapper { margin-bottom: 50px; }
+
   .supplies-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
   .ig-grid { gap: 8px; }
 

@@ -30,30 +30,33 @@
 </nav>
 
 <!-- ========== COLLECTION PAGE ========== -->
-<section id="collection-page" style="padding-top: 140px;">
-  <div class="section-head">
-    <div class="sec-badge">FEATURED</div>
-    <h2 class="sec-title">THE COLLECTION</h2>
-    <p class="sec-sub">Browse by category to find your perfect card</p>
-  </div>
+<section id="collection-page" style="padding-top: 120px;">
+  <div class="collection-container">
+    <div class="section-head" style="margin-bottom: 80px;">
+      <h2 class="sec-title" style="margin-bottom: 8px;">THE COLLECTION</h2>
+      <p class="sec-sub">A curated showcase of premium sports cards</p>
+    </div>
 
-  <!-- Category Filter Buttons -->
-  <div class="category-filter">
-    <button class="filter-btn active" data-category="all">All Categories</button>
-    <button class="filter-btn" data-category="mens-soccer">Men's Soccer</button>
-    <button class="filter-btn" data-category="womens-soccer">Women's Soccer</button>
-    <button class="filter-btn" data-category="other-sports">Other Sports</button>
-    <button class="filter-btn" data-category="tcg">TCG</button>
-  </div>
+    <!-- Category Filter Buttons -->
+    <div class="category-filter-wrapper">
+      <div class="category-filter">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="mens-soccer">Men's Soccer</button>
+        <button class="filter-btn" data-category="womens-soccer">Women's Soccer</button>
+        <button class="filter-btn" data-category="other-sports">Other Sports</button>
+        <button class="filter-btn" data-category="tcg">Trading Cards</button>
+      </div>
+    </div>
 
-  <!-- Cards Grid -->
-  <div class="card-grid" id="cardsGrid">
-    <!-- Cards will be loaded here by JavaScript -->
-  </div>
+    <!-- Cards Grid -->
+    <div class="card-grid" id="cardsGrid">
+      <!-- Cards will be loaded here by JavaScript -->
+    </div>
 
-  <!-- Back to Home -->
-  <div style="text-align: center; margin-top: 60px;">
-    <a href="index.html" class="btn btn-outline">← Back to Home</a>
+    <!-- Back to Home -->
+    <div class="collection-footer">
+      <a href="index.html" class="btn btn-outline">← Back to Home</a>
+    </div>
   </div>
 </section>
 
