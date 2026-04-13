@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soccer Sets | Top Drawer Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══════════════════════════════════════════
+       SOCCER SETS PAGE — Custom Styles
+    ═══════════════════════════════════════════ */
+
+    #sets-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 60px;
+      background: linear-gradient(135deg, rgba(187,37,51,.1) 0%, rgba(0,102,178,.1) 100%);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .sets-hero-content {
+      text-align: center;
+      max-width: 720px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .sets-hero-content h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-family: var(--font-display);
+      letter-spacing: .05em;
+      margin-bottom: 16px;
+    }
+
+    .sets-hero-content p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    /* Featured Set Section */
+    #featured-set {
+      padding: 80px 24px;
+      background: rgba(187,37,51,.04);
+    }
+
+    .featured-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+
+    .featured-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: .04em;
+      margin-bottom: 40px;
+    }
+
+    .featured-set-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 60px;
+      background: linear-gradient(135deg, rgba(187,37,51,.08) 0%, rgba(0,102,178,.08) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .featured-set-image {
+      aspect-ratio: 1;
+      background: radial-gradient(circle at 30% 30%, rgba(187,37,51,.15), rgba(0,102,178,.15));
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.1);
+      border: 2px dashed var(--border);
+    }
+
+    .featured-set-info h3 {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      letter-spacing: .08em;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .featured-set-year {
+      font-size: .95rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .featured-set-description {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .featured-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .spec-item {
+      background: rgba(255,255,255,.03);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .spec-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .spec-value {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .featured-price {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      letter-spacing: .04em;
+      margin: 32px 0;
+      color: var(--primary);
+    }
+
+    .featured-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .featured-set-card {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 24px;
+      }
+      .featured-specs {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sets Grid */
+    #sets-grid-section {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sets-grid-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: .04em;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .sets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+
+    .set-card {
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .set-card:hover {
+      border-color: var(--primary);
+      background: rgba(187,37,51,.08);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-primary);
+    }
+
+    .set-card-image {
+      aspect-ratio: 1;
+      background: radial-gradient(circle at 30% 30%, rgba(187,37,51,.2), rgba(0,102,178,.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.08);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .set-card-content {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .set-rarity {
+      display: inline-block;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .set-rarity.common {
+      background: rgba(74,222,128,.15);
+      color: #4ade80;
+      border: 1px solid rgba(74,222,128,.3);
+    }
+
+    .set-rarity.rare {
+      background: rgba(96,165,250,.15);
+      color: #60a5fa;
+      border: 1px solid rgba(96,165,250,.3);
+    }
+
+    .set-rarity.ultra-rare {
+      background: rgba(251,146,60,.15);
+      color: #fb923c;
+      border: 1px solid rgba(251,146,60,.3);
+    }
+
+    .set-rarity.legend {
+      background: rgba(168,85,247,.15);
+      color: #a855f7;
+      border: 1px solid rgba(168,85,247,.3);
+    }
+
+    .set-card-name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .set-card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700;
+    }
+
+    .meta-value {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .set-card-price {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: .04em;
+      color: var(--primary);
+      margin: 16px 0;
+    }
+
+    .set-card-btn {
+      margin-top: auto;
+      padding: 10px 16px;
+      font-size: .85rem;
+      background: rgba(187,37,51,.15);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .set-card-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="images/Top Drawer.png" alt="Top Drawer Cards Logo" class="nav-logo-img">
+      <span class="logo-text">TOP DRAWER <span class="logo-accent">CARDS</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="collection.html">Collection</a></li>
+      <li><a href="soccer-sets.html">Sets</a></li>
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="index.html#instagram">Follow</a></li>
+      <li><a href="index.html#supplies">Supplies</a></li>
+      <li><a href="index.html#shop" class="nav-cta">Buy Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ========== HERO SECTION ========== -->
+<section id="sets-hero">
+  <div class="sets-hero-content">
+    <h1>SOCCER SETS</h1>
+    <p>Explore our curated collections of premium soccer card sets.</p>
+  </div>
+</section>
+
+<!-- ========== FEATURED SET ========== -->
+<section id="featured-set">
+  <div class="featured-container">
+    <div class="featured-badge">FEATURED</div>
+    <h2 class="featured-title">Featured Set</h2>
+
+    <div class="featured-set-card">
+      <div class="featured-set-image">[Image]</div>
+      <div class="featured-set-info">
+        <h3>Set Name</h3>
+        <div class="featured-set-year">Year Released</div>
+        <p class="featured-set-description">Set description goes here.</p>
+
+        <div class="featured-specs">
+          <div class="spec-item">
+            <div class="spec-label">Cards Included</div>
+            <div class="spec-value">—</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Print Run</div>
+            <div class="spec-value">—</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Rarity</div>
+            <div class="spec-value">—</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">Grade</div>
+            <div class="spec-value">—</div>
+          </div>
+        </div>
+
+        <div class="featured-price">$0.00</div>
+
+        <div class="featured-ctas">
+          <button class="btn btn-primary">Add to Cart</button>
+          <button class="btn btn-outline">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SETS GRID ========== -->
+<section id="sets-grid-section">
+  <h2 class="sets-grid-title">All Available Sets</h2>
+
+  <div class="sets-grid" id="setsGrid">
+    <!-- Sets will be loaded here by JavaScript -->
+  </div>
+
+  <div style="text-align: center;">
+    <a href="index.html" class="btn btn-outline">← Back to Home</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer style="background: rgba(0,0,0,.3); padding: 40px 24px; text-align: center; border-top: 1px solid var(--border);">
+  <p style="color: var(--muted); font-size: 0.9rem;">© 2026 Top Drawer Cards. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // Soccer Sets Data
+  const soccerSets = [
+    // Add your soccer sets here
+  ];
+
+  // Render sets grid
+  function renderSets() {
+    const setsGrid = document.getElementById('setsGrid');
+    setsGrid.innerHTML = '';
+
+    soccerSets.forEach(set => {
+      const setHTML = `
+        <div class="set-card fade-up visible">
+          <div class="set-card-image">[Image]</div>
+          <div class="set-card-content">
+            <span class="set-rarity ${set.rarity}">${set.rarity.toUpperCase()}</span>
+            <h3 class="set-card-name">${set.name}</h3>
+
+            <div class="set-card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Year</span>
+                <span class="meta-value">${set.year}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Cards</span>
+                <span class="meta-value">${set.cards}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Print Run</span>
+                <span class="meta-value">${set.printRun}</span>
+              </div>
+            </div>
+
+            <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; flex: 1;">${set.description}</p>
+
+            <div class="set-card-price">${set.price}</div>
+            <button class="set-card-btn">View Details</button>
+          </div>
+        </div>
+      `;
+      setsGrid.innerHTML += setHTML;
+    });
+  }
+
+  // Initial render
+  renderSets();
+</script>
+
+</body>
+</html>
