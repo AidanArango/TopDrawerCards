@@ -468,15 +468,21 @@
 
             <button class="set-card-toggle" style="background: none; border: none; cursor: pointer; padding: 8px 0; margin-top: 12px; display: flex; align-items: center; gap: 8px; color: var(--text); font-weight: 600; font-size: 0.9rem; width: 100%;">
               <span class="toggle-arrow" style="display: inline-block; transition: transform 0.3s ease; transform: rotate(0deg);">▼</span>
-              <span>Details</span>
+              <span>Description</span>
             </button>
 
             <div class="set-card-details" style="display: none; max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
               <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; padding-top: 12px;">${set.description.replace(/\n/g, '<br>')}</div>
-              
-              ${set.specs ? `
+            </div>
+
+            ${set.specs ? `
+            <button class="set-card-specs-toggle" style="background: none; border: none; cursor: pointer; padding: 8px 0; margin-top: 12px; display: flex; align-items: center; gap: 8px; color: var(--text); font-weight: 600; font-size: 0.9rem; width: 100%;">
+              <span class="specs-toggle-arrow" style="display: inline-block; transition: transform 0.3s ease; transform: rotate(0deg);">▼</span>
+              <span>Specifications</span>
+            </button>
+
+            <div class="set-card-specs" style="display: none; max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
               <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; font-size: 0.85rem;">
-                <div style="font-weight: 600; margin-bottom: 8px; color: var(--text);">Specifications</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: var(--muted);">
                   ${set.specs.sku ? `<div><span style="font-weight: 500;">SKU:</span> ${set.specs.sku}</div>` : ''}
                   ${set.specs.category ? `<div><span style="font-weight: 500;">Category:</span> ${set.specs.category}</div>` : ''}
@@ -489,7 +495,8 @@
                   ${set.specs.availableFrom ? `<div style="grid-column: 1 / -1;"><span style="font-weight: 500;">Available From:</span> ${set.specs.availableFrom}</div>` : ''}
                 </div>
               </div>
-              ` : ''}
+            </div>
+            ` : ''}
             </div>
           </div>
         </div>
@@ -511,6 +518,25 @@
         } else {
           detailsDiv.style.display = 'block';
           detailsDiv.style.maxHeight = '1000px';
+          arrow.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+
+    // Add toggle event listeners for specs buttons
+    document.querySelectorAll('.set-card-specs-toggle').forEach(button => {
+      button.addEventListener('click', function() {
+        const specsDiv = this.nextElementSibling;
+        const arrow = this.querySelector('.specs-toggle-arrow');
+        const isOpen = specsDiv.style.display === 'block';
+        
+        if (isOpen) {
+          specsDiv.style.display = 'none';
+          specsDiv.style.maxHeight = '0';
+          arrow.style.transform = 'rotate(0deg)';
+        } else {
+          specsDiv.style.display = 'block';
+          specsDiv.style.maxHeight = '1000px';
           arrow.style.transform = 'rotate(180deg)';
         }
       });
