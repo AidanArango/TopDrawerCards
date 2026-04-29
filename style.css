@@ -806,26 +806,6 @@ section { padding: 100px 24px; }
   color: var(--text);
 }
 
-.fc-buy {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: var(--primary);
-  color: #fff;
-  font-family: var(--font-heading);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 8px 10px;
-  border-radius: 5px;
-  transition: var(--transition);
-}
-.fc-buy:hover {
-  background: var(--primary-light);
-  box-shadow: var(--shadow-primary);
-}
-
 .variant-holo {
   background: linear-gradient(145deg, #1a1130 0%, #2a1a50 40%, #1a2040 100%);
   border: 1px solid rgba(160,80,255,.4);
@@ -976,119 +956,6 @@ section { padding: 100px 24px; }
   margin-top: 80px;
   padding-top: 40px;
   border-top: 1px solid rgba(255,255,255,.06);
-}
-
-/* ═══════════════════════════════════════════
-   SHOP
-═══════════════════════════════════════════ */
-#shop {
-  background: var(--bg);
-}
-
-.shop-wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-.shop-text .sec-title { text-align: left; }
-.shop-text .sec-badge { display: block; text-align: left; }
-
-.shop-text p {
-  color: var(--muted);
-  font-size: .95rem;
-  margin: 16px 0 28px;
-  max-width: 440px;
-  line-height: 1.7;
-}
-
-.shop-features {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 36px;
-}
-
-.shop-features li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-heading);
-  font-size: .9rem;
-  font-weight: 600;
-  letter-spacing: .05em;
-  color: var(--text);
-}
-
-.sf-icon {
-  font-size: 1.15rem;
-  width: 36px;
-  height: 36px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-/* Card stack visual */
-.shop-visual {
-  display: flex;
-  justify-content: center;
-}
-
-.card-stack {
-  position: relative;
-  width: 200px;
-  height: 280px;
-}
-
-.cs-card {
-  position: absolute;
-  top: 0; left: 0;
-  width: 200px;
-  height: 280px;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.65);
-}
-
-.cs-3 {
-  background: linear-gradient(145deg, #001230, #001a48);
-  border: 1px solid rgba(0,102,178,.3);
-  transform: rotate(10deg) translateX(24px) translateY(10px);
-}
-
-.cs-2 {
-  background: linear-gradient(145deg, #1c1400, #2e2000);
-  border: 1px solid rgba(187,37,51,.3);
-  transform: rotate(4deg) translateX(10px);
-}
-
-.cs-1 {
-  background: linear-gradient(145deg, #1a1130, #2a1a50);
-  border: 1px solid rgba(160,80,255,.4);
-  transform: rotate(-2deg);
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 14px;
-}
-
-.cs-tag {
-  font-family: var(--font-heading);
-  font-size: .6rem;
-  font-weight: 700;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  background: var(--primary);
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 4px;
 }
 
 /* ═══════════════════════════════════════════
@@ -1302,7 +1169,6 @@ footer {
 ═══════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .hero-cards { right: 2%; }
-  .shop-wrap { gap: 48px; }
   .supplies-grid { grid-template-columns: repeat(2, 1fr); }
   .card-grid { gap: 40px 32px; }
   .category-filter { gap: 12px; padding: 20px 24px; }
@@ -1344,13 +1210,6 @@ footer {
     margin: 40px auto 0;
     justify-content: center;
   }
-
-  /* Shop */
-  .shop-wrap { grid-template-columns: 1fr; gap: 56px; }
-  .shop-visual { order: -1; }
-  .shop-text .sec-title,
-  .shop-text .sec-badge { text-align: center; }
-  .shop-text p { margin: 16px auto 28px; }
 
   /* IG */
   .ig-grid { grid-template-columns: repeat(2, 1fr); }

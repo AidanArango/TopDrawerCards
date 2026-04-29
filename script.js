@@ -25,7 +25,7 @@ window.addEventListener('scroll', () => {
 
 // ── Scroll fade-in ──
 const fadeEls = document.querySelectorAll(
-  '.section-head, .card-item, .shop-text, .shop-visual, .ig-post, .supply-card, .footer-inner'
+  '.section-head, .card-item, .ig-post, .supply-card, .footer-inner'
 );
 
 const observer = new IntersectionObserver((entries) => {
