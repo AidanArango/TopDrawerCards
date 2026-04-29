@@ -378,7 +378,7 @@
 
 <!-- ========== SETS GRID ========== -->
 <section id="sets-grid-section">
-  <h2 class="sets-grid-title">All Available Sets</h2>
+  <h2 class="sets-grid-title">New Soccer Sets</h2>
 
   <div class="sets-grid" id="setsGrid">
     <!-- Sets will be loaded here by JavaScript -->
@@ -398,7 +398,22 @@
 <script>
   // Soccer Sets Data
   const soccerSets = [
-    // Add your soccer sets here
+    // Merlin Premier League 2026 - Hobby Boxes
+    {
+      name: "Merlin Premier League 2026 - Hobby",
+      year: "2026",
+      cards: "500+",
+      printRun: "Hobby",
+      description: "Release Date: May 28, 2026\n\nBase Set: 200 cards\nInserts: Holographic Parallels (1:4), Autograph Cards (1:12), Rookie Cards (1:6)\n\nPack Odds:\n- Base Card: 5 per pack\n- Holographic Parallel: 1:4 packs\n- Autograph: 1:12 packs\n- Rookie: 1:6 packs\n\nSRP: $150 per box (24 packs)"
+    },
+    // Merlin Premier League 2026 - Value/Blaster Boxes
+    {
+      name: "Merlin Premier League 2026 - Value",
+      year: "2026",
+      cards: "500+",
+      printRun: "Value",
+      description: "Release Date: May 28, 2026\n\nBase Set: 200 cards\nInserts: Holographic Parallels (1:24), Autograph Cards (1:144), Rookie Cards (1:36)\n\nPack Odds:\n- Base Card: 8 per pack\n- Holographic Parallel: 1:24 packs\n- Autograph: 1:144 packs\n- Rookie: 1:36 packs\n\nSRP: $25 per box (24 packs)"
+    }
   ];
 
   // Render sets grid
@@ -411,7 +426,7 @@
         <div class="set-card fade-up visible">
           <div class="set-card-image">[Image]</div>
           <div class="set-card-content">
-            <span class="set-rarity ${set.rarity}">${set.rarity.toUpperCase()}</span>
+            ${set.rarity ? `<span class="set-rarity ${set.rarity}">${set.rarity.toUpperCase()}</span>` : ''}
             <h3 class="set-card-name">${set.name}</h3>
 
             <div class="set-card-meta">
@@ -429,7 +444,7 @@
               </div>
             </div>
 
-            <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; flex: 1;">${set.description}</p>
+            <div style="color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; flex: 1;">${set.description.replace(/\n/g, '<br>')}</div>
           </div>
         </div>
       `;
