@@ -483,7 +483,7 @@
 
             <div class="set-card-specs" style="display: none; max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
               <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; font-size: 0.85rem;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; color: var(--muted);">
+                <div style="display: flex; flex-direction: column; gap: 6px; color: var(--muted);">
                   ${set.specs.sku ? `<div><span style="font-weight: 500;">SKU:</span> ${set.specs.sku}</div>` : ''}
                   ${set.specs.category ? `<div><span style="font-weight: 500;">Category:</span> ${set.specs.category}</div>` : ''}
                   ${set.specs.subCategories ? `<div><span style="font-weight: 500;">Sub Cat.:</span> ${set.specs.subCategories}</div>` : ''}
@@ -492,7 +492,7 @@
                   ${set.specs.brand ? `<div><span style="font-weight: 500;">Brand:</span> ${set.specs.brand}</div>` : ''}
                   ${set.specs.subBrand ? `<div><span style="font-weight: 500;">Sub Brand:</span> ${set.specs.subBrand}</div>` : ''}
                   ${set.specs.productType ? `<div><span style="font-weight: 500;">Type:</span> ${set.specs.productType}</div>` : ''}
-                  ${set.specs.availableFrom ? `<div style="grid-column: 1 / -1;"><span style="font-weight: 500;">Available From:</span> ${set.specs.availableFrom}</div>` : ''}
+                  ${set.specs.availableFrom ? `<div><span style="font-weight: 500;">Available From:</span> ${set.specs.availableFrom}</div>` : ''}
                 </div>
               </div>
             </div>
