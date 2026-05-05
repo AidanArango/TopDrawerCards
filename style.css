@@ -192,19 +192,28 @@ section { padding: 100px 24px; }
   flex-shrink: 0;
   transition: var(--transition);
   text-decoration: none;
+  max-width: 240px;
 }
 
 .nav-logo:hover {
   opacity: 0.8;
 }
 
-.logo-ball { font-size: 1.4rem; }
-
 .logo-text {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1rem;
   letter-spacing: .08em;
   color: var(--text);
+  white-space: nowrap;
+}
+
+.logo-accent { color: var(--primary); }
+
+/* Hide any legacy logo images so only the one text logo appears */
+.nav-logo img,
+.hero-logo,
+.logo-img {
+  display: none !important;
 }
 
 .logo-accent { color: var(--primary); }
