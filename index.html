@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Drawer Cards | Premium Soccer Trading Cards</title>
+  <title>My Sports Card Collection | Top Drawer Cards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -15,207 +15,253 @@
 <nav id="navbar">
   <div class="nav-container">
     <a href="index.html" class="nav-logo">
-      <img src="images/Top Drawer.png" alt="Top Drawer Cards Logo" class="nav-logo-img">
       <span class="logo-text">TOP DRAWER <span class="logo-accent">CARDS</span></span>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#collection">Collection</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="soccer-sets.html">Sets</a></li>
-      <li><a href="#instagram">Follow</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
   </div>
 </nav>
 
-<!-- ========== HERO ========== -->
-<section id="hero">
+
+<!-- ========== HERO SECTION ========== -->
+<section id="hero" class="hero-new">
   <div class="hero-bg">
-    <div class="pitch-grid"></div>
-    <div class="pitch-center"></div>
-    <div class="glow glow-gold"></div>
-    <div class="glow glow-blue"></div>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="gradient-overlay"></div>
   </div>
 
-  <div class="hero-content">
-    <div class="hero-logo">
-      <img src="images/Top Drawer.png" alt="Top Drawer Cards Logo" class="logo-img">
+  <div class="hero-split">
+    <!-- Left Side: Text Content -->
+    <div class="hero-left">
+      <h1 class="hero-heading">My Sports Card Collection</h1>
+      <p class="hero-desc">A curated showcase of my favorite graded and raw cards from baseball, basketball, football, soccer, and hockey</p>
+      <a href="#collection" class="btn btn-primary">Explore Collection</a>
     </div>
-    <div class="hero-badge">&#9917; PREMIUM COLLECTION</div>
-    <h1 class="hero-title">
-      <span class="title-top">TOP DRAWER</span>
-      <span class="title-bottom">CARDS</span>
-    </h1>
-    <p class="hero-sub">Modern &amp; vintage soccer cards &middot; Graded gems &middot; Rare finds</p>
-    <div class="hero-ctas">
-      <a href="#collection" class="btn btn-primary">View Collection</a>
-    </div>
-  </div>
 
-  <div class="hero-cards">
-    <!-- Card 1 -->
-    <div class="hero-card hc-1">
-      <div class="hc-inner hc-holo">
-        <div class="hc-num">#19</div>
-        <div class="hc-art">
-          <div class="player-silhouette"></div>
+    <!-- Right Side: Featured Card -->
+    <div class="hero-right">
+      <div class="featured-card">
+        <div class="featured-inner featured-holo">
+          <div class="fc-num">#23</div>
+          <div class="fc-art">
+            <div class="player-silhouette"></div>
+          </div>
+          <div class="fc-footer">
+            <div class="fc-name">Featured Card</div>
+            <div class="fc-details">GRADED • 2024</div>
+          </div>
+          <div class="fc-shine"></div>
         </div>
-        <div class="hc-foot">
-          <div class="hc-name">DAVIES</div>
-          <div class="hc-team">BAYERN MUNICH</div>
-          <div class="hc-serial">AUTO 01/10</div>
-        </div>
-        <div class="hc-shine"></div>
-      </div>
-    </div>
-    <!-- Card 2 -->
-    <div class="hero-card hc-2">
-      <div class="hc-inner hc-gold">
-        <div class="hc-num">#7</div>
-        <div class="hc-art">
-          <div class="player-silhouette"></div>
-        </div>
-        <div class="hc-foot">
-          <div class="hc-name">RONALDO</div>
-          <div class="hc-team">AL NASSR</div>
-          <div class="hc-serial">PSA 10</div>
-        </div>
-        <div class="hc-shine"></div>
-      </div>
-    </div>
-    <!-- Card 3 -->
-    <div class="hero-card hc-3">
-      <div class="hc-inner hc-blue">
-        <div class="hc-num">#9</div>
-        <div class="hc-art">
-          <div class="player-silhouette"></div>
-        </div>
-        <div class="hc-foot">
-          <div class="hc-name">HAALAND</div>
-          <div class="hc-team">MAN CITY</div>
-          <div class="hc-serial">RC /99</div>
-        </div>
-        <div class="hc-shine"></div>
       </div>
     </div>
   </div>
-
-  <a href="#collection" class="scroll-down" aria-label="Scroll down">
-    <span class="scroll-arrow"></span>
-  </a>
 </section>
 
-<!-- ========== COLLECTION ========== -->
-<section id="collection" class="collection-section">
-  <a href="collection.html" class="collection-link">
+<!-- ========== CATEGORIES FILTER ========== -->
+<section id="categories" class="categories-section">
+  <div class="categories-container">
+    <button class="category-btn active" data-category="all">All Sports</button>
+    <button class="category-btn" data-category="baseball">Baseball</button>
+    <button class="category-btn" data-category="basketball">Basketball</button>
+    <button class="category-btn" data-category="football">Football</button>
+    <button class="category-btn" data-category="soccer">Soccer</button>
+    <button class="category-btn" data-category="hockey">Hockey</button>
+  </div>
+</section>
+
+<!-- ========== CARD SHOWCASE ========== -->
+<section id="collection" class="collection-showcase">
   <div class="section-head">
-    <div class="sec-badge">FEATURED</div>
-    <h2 class="sec-title">THE COLLECTION</h2>
+    <h2 class="sec-title">Collection</h2>
     <p class="sec-sub">Hand-picked gems straight from the top drawer</p>
   </div>
 
-  <div class="card-grid">
-
-    <div class="card-item">
-      <div class="flip-card" data-tilt>
-        <div class="flip-inner">
-          <div class="flip-front variant-holo">
-            <div class="fc-stripe"></div>
-            <div class="fc-body">
-              <div class="fc-num">#10</div>
-              <div class="player-placeholder"></div>
+  <div class="scroll-container">
+    <div class="scroll-track" id="scrollTrack">
+      <!-- Card 1 -->
+      <div class="collection-card" data-category="baseball">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-1">
+            <div class="card-number">1</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
             </div>
-            <div class="fc-foot">
-              <div class="fc-name">PLAYER NAME</div>
-              <div class="fc-team">TEAM &middot; YEAR</div>
-              <div class="fc-serial">AUTO /25</div>
-            </div>
-            <div class="fc-shine"></div>
-          </div>
-          <div class="flip-back">
-            <div class="fb-logo">TOP DRAWER CARDS</div>
-            <div class="fb-stats">
-              <div class="fb-row"><span>CONDITION</span><span class="fb-val">MINT</span></div>
-              <div class="fb-row"><span>GRADE</span><span class="fb-val">PSA 10</span></div>
-              <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">/25</span></div>
-              <div class="fb-row"><span>YEAR</span><span class="fb-val">2024</span></div>
+            <div class="card-info">
+              <div class="card-name">Derek Jeter</div>
+              <div class="card-meta">1992 SP Rookie</div>
             </div>
           </div>
         </div>
+        <div class="card-label">
+          <span class="grade-badge">PSA 9</span>
+          <span class="card-title">Rookie Card</span>
+        </div>
       </div>
-      <div class="ci-label">
-        <span class="ci-badge">AUTO /25</span>
-        <span class="ci-name">Add Player Name</span>
-      </div>
-    </div>
 
-    <div class="card-item">
-      <div class="flip-card" data-tilt>
-        <div class="flip-inner">
-          <div class="flip-front variant-gold">
-            <div class="fc-stripe"></div>
-            <div class="fc-body">
-              <div class="fc-num">#7</div>
-              <div class="player-placeholder"></div>
+      <!-- Card 2 -->
+      <div class="collection-card" data-category="basketball">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-2">
+            <div class="card-number">23</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
             </div>
-            <div class="fc-foot">
-              <div class="fc-name">PLAYER NAME</div>
-              <div class="fc-team">TEAM &middot; YEAR</div>
-              <div class="fc-serial">PSA 10</div>
-            </div>
-            <div class="fc-shine"></div>
-          </div>
-          <div class="flip-back">
-            <div class="fb-logo">TOP DRAWER CARDS</div>
-            <div class="fb-stats">
-              <div class="fb-row"><span>CONDITION</span><span class="fb-val">GEM MINT</span></div>
-              <div class="fb-row"><span>GRADE</span><span class="fb-val">PSA 10</span></div>
-              <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">BASE</span></div>
-              <div class="fb-row"><span>YEAR</span><span class="fb-val">2023</span></div>
+            <div class="card-info">
+              <div class="card-name">Michael Jordan</div>
+              <div class="card-meta">1986 Fleer</div>
             </div>
           </div>
         </div>
+        <div class="card-label">
+          <span class="grade-badge">PSA 10</span>
+          <span class="card-title">GOAT Card</span>
+        </div>
       </div>
-      <div class="ci-label">
-        <span class="ci-badge badge-psa">PSA 10</span>
-        <span class="ci-name">Add Player Name</span>
-      </div>
-    </div>
 
-    <div class="card-item">
-      <div class="flip-card" data-tilt>
-        <div class="flip-inner">
-          <div class="flip-front variant-blue">
-            <div class="fc-stripe"></div>
-            <div class="fc-body">
-              <div class="fc-num">#9</div>
-              <div class="player-placeholder"></div>
+      <!-- Card 3 -->
+      <div class="collection-card" data-category="football">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-3">
+            <div class="card-number">12</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
             </div>
-            <div class="fc-foot">
-              <div class="fc-name">PLAYER NAME</div>
-              <div class="fc-team">TEAM &middot; YEAR</div>
-              <div class="fc-serial">RC /99</div>
-            </div>
-            <div class="fc-shine"></div>
-          </div>
-          <div class="flip-back">
-            <div class="fb-logo">TOP DRAWER CARDS</div>
-            <div class="fb-stats">
-              <div class="fb-row"><span>CONDITION</span><span class="fb-val">NM-MT</span></div>
-              <div class="fb-row"><span>GRADE</span><span class="fb-val">RAW</span></div>
-              <div class="fb-row"><span>PRINT RUN</span><span class="fb-val">/99</span></div>
-              <div class="fb-row"><span>YEAR</span><span class="fb-val">2022</span></div>
+            <div class="card-info">
+              <div class="card-name">Tom Brady</div>
+              <div class="card-meta">2000 Playoff Prestige</div>
             </div>
           </div>
         </div>
+        <div class="card-label">
+          <span class="grade-badge">PSA 8.5</span>
+          <span class="card-title">Early Card</span>
+        </div>
       </div>
-      <div class="ci-label">
-        <span class="ci-badge badge-rc">RC</span>
-        <span class="ci-name">Add Player Name</span>
-      </div>
-    </div>
 
+      <!-- Card 4 -->
+      <div class="collection-card" data-category="soccer">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-4">
+            <div class="card-number">7</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
+            </div>
+            <div class="card-info">
+              <div class="card-name">Cristiano Ronaldo</div>
+              <div class="card-meta">2003 Panini Premier</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-label">
+          <span class="grade-badge">RAW</span>
+          <span class="card-title">Rookie</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="collection-card" data-category="hockey">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-5">
+            <div class="card-number">99</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
+            </div>
+            <div class="card-info">
+              <div class="card-name">Wayne Gretzky</div>
+              <div class="card-meta">1979 O-Pee-Chee</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-label">
+          <span class="grade-badge">PSA 6</span>
+          <span class="card-title">Legend</span>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="collection-card" data-category="baseball">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-1">
+            <div class="card-number">42</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
+            </div>
+            <div class="card-info">
+              <div class="card-name">Jackie Robinson</div>
+              <div class="card-meta">1947 Leaf</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-label">
+          <span class="grade-badge">PSA 7</span>
+          <span class="card-title">Vintage</span>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="collection-card" data-category="basketball">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-2">
+            <div class="card-number">24</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
+            </div>
+            <div class="card-info">
+              <div class="card-name">Kobe Bryant</div>
+              <div class="card-meta">1996 Topps Chrome</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-label">
+          <span class="grade-badge">BGS 9.5</span>
+          <span class="card-title">Star Card</span>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="collection-card" data-category="football">
+        <div class="card-slab">
+          <div class="slab-inner slab-variant-3">
+            <div class="card-number">18</div>
+            <div class="card-image">
+              <div class="card-placeholder"></div>
+            </div>
+            <div class="card-info">
+              <div class="card-name">Peyton Manning</div>
+              <div class="card-meta">1998 Leaf Rookie</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-label">
+          <span class="grade-badge">PSA 8</span>
+          <span class="card-title">Hall of Famer</span>
+        </div>
+      </div>
+
+    </div>
   </div>
-  </a>
+
+  <div class="scroll-nav">
+    <button class="scroll-btn scroll-left" id="scrollLeft" aria-label="Scroll left">&#10094;</button>
+    <button class="scroll-btn scroll-right" id="scrollRight" aria-label="Scroll right">&#10095;</button>
+  </div>
+</section>
+
+<!-- ========== ABOUT SECTION ========== -->
+<section id="about" class="about-section">
+  <div class="section-head">
+    <h2 class="sec-title">About This Collection</h2>
+  </div>
+  <div class="about-content">
+    <p>Welcome to my personal sports card collection showcase. I've been collecting graded and raw cards for years, with a focus on star players, vintage cards, and unique finds across all major sports.</p>
+    <p>This collection represents my passion for the hobby and appreciation for the artistry of sports cards. Each card tells a story of a legendary moment in sports history.</p>
+  </div>
 </section>
 
 <!-- ========== INSTAGRAM ========== -->
@@ -274,7 +320,7 @@
       <span class="logo-ball">&#9917;</span>
       <span class="logo-text">TOP DRAWER <span class="logo-accent">CARDS</span></span>
     </div>
-    <p class="footer-tag">Premium Soccer Card Collection &middot; Est. 2024</p>
+    <p class="footer-tag">Premium Sports Card Collection &middot; Est. 2024</p>
     <nav class="footer-links">
       <a href="#collection">Collection</a>
       <a href="soccer-sets.html">Sets</a>
