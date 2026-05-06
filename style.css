@@ -470,16 +470,16 @@ section { padding: 100px 24px; }
 }
 
 .category-btn:hover {
-  border-color: var(--primary);
+  border-color: var(--blue);
   color: var(--text);
-  background: rgba(187,37,51,.08);
+  background: rgba(0,102,178,.08);
 }
 
 .category-btn.active {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: var(--blue);
+  border-color: var(--blue);
   color: #fff;
-  box-shadow: 0 8px 24px rgba(187,37,51,.35);
+  box-shadow: 0 8px 24px rgba(0,102,178,.35);
 }
 
 /* ═══════════════════════════════════════════
@@ -684,7 +684,7 @@ section { padding: 100px 24px; }
   scroll-behavior: smooth;
   padding-bottom: 20px;
   scrollbar-width: thin;
-  scrollbar-color: var(--primary) transparent;
+  scrollbar-color: var(--blue) transparent;
 }
 
 .scroll-track::-webkit-scrollbar {
@@ -696,12 +696,12 @@ section { padding: 100px 24px; }
 }
 
 .scroll-track::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--blue);
   border-radius: 3px;
 }
 
 .scroll-track::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light);
+  background: var(--blue-light);
 }
 
 .collection-card {
