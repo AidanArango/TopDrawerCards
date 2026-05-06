@@ -346,6 +346,12 @@ section { padding: 100px 24px; }
   justify-content: center;
 }
 
+.hero-logo {
+  max-width: 100%;
+  width: min(320px, 100%);
+  display: block;
+}
+
 .featured-card {
   width: 240px;
   height: 340px;
