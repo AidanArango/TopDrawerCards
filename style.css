@@ -902,6 +902,8 @@ section { padding: 100px 24px; }
 }
 
 .ig-post {
+  display: block;
+  width: 100%;
   aspect-ratio: 1;
   border-radius: 12px;
   overflow: hidden;
