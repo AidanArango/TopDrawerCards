@@ -211,7 +211,6 @@ section { padding: 100px 24px; }
 
 /* Hide any legacy logo images so only the one text logo appears */
 .nav-logo img,
-.hero-logo,
 .logo-img {
   display: none !important;
 }
