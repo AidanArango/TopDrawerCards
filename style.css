@@ -4,18 +4,18 @@
 
 /* ── 1. VARIABLES ── */
 :root {
-  --bg:         #0a0a12;
-  --surface:    #1a1a1a;
-  --surface-2:  #252525;
+  --bg: linear-gradient(180deg, #fbf8f4 0%, #f0ede8 100%), radial-gradient(circle at 20% 15%, rgba(255,255,255,0.75) 0, transparent 18%), radial-gradient(circle at 80% 30%, rgba(229,226,218,0.45) 0, transparent 18%);
+  --surface:    rgba(255,255,255,0.92);
+  --surface-2:  #f5f1eb;
   --primary:    #BB2533;
   --primary-dark:  #8a1a24;
   --primary-light: #d93a4a;
   --blue:       #0066B2;
   --blue-dark:  #004080;
   --blue-light: #3d94d4;
-  --text:       #ffffff;
-  --muted:      #DADADA;
-  --border:     rgba(187,37,51,.18);
+  --text:       #121212;
+  --muted:      #6f6b67;
+  --border:     rgba(0,0,0,.08);
   --radius:     12px;
   --radius-sm:  6px;
 
@@ -167,7 +167,7 @@ section { padding: 100px 24px; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  background: rgba(8,8,15,.88);
+  background: rgba(255,255,255,.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
