@@ -348,7 +348,8 @@
       badgeClass: normalized.badgeclass || '',
       condition: normalized.condition || '',
       grade: normalized.grade || '',
-      printRun: normalized.printrun || ''
+      printRun: normalized.printrun || '',
+      image: normalized.image || normalized.img || normalized.imageurl || ''
     };
   }
 
@@ -455,7 +456,9 @@
           <div class="card-front ${card.variant}">
             <div class="fc-stripe"></div>
             <div class="fc-body">
-              <div class="player-placeholder"><span class="player-title">${card.playerName}</span></div>
+              <div class="player-placeholder">
+                ${card.image ? `<img src="${card.image}" alt="${card.playerName}" class="player-image">` : `<span class="player-title">${card.playerName}</span>`}
+              </div>
               <div class="fc-num">${card.number}</div>
             </div>
             <div class="fc-foot">
