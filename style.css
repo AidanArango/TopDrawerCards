@@ -603,13 +603,20 @@ section { padding: 100px 24px; }
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.08);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
 }
 
-.fc-foot {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 16px;
+.player-placeholder .player-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
   color: var(--muted);
 }
 
