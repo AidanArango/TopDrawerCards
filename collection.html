@@ -46,6 +46,18 @@
       </div>
     </div>
 
+    <!-- Google Sheet Upload -->
+    <div class="csv-upload" style="margin-bottom: 32px;">
+      <label for="sheetUrl" style="display:block; font-weight:700; margin-bottom:8px;">Load Google Sheet</label>
+      <div style="display:flex; flex-wrap:wrap; gap:10px; max-width:420px;">
+        <input type="url" id="sheetUrl" placeholder="Paste Google Sheet link" style="flex:1; padding: 12px; min-width:220px;">
+        <button id="loadSheetBtn" style="padding: 12px 18px; border:none; background: var(--accent); color:#fff; cursor:pointer;">Load Sheet</button>
+      </div>
+      <p id="csvMessage" style="margin-top:10px; color: var(--muted); font-size:0.95rem; max-width:420px;">
+        Paste a Google Sheet URL and click Load. The sheet must be shared publicly or anyone with the link can view it.
+      </p>
+    </div>
+
     <!-- Cards Grid -->
     <div class="card-grid" id="cardsGrid">
       <!-- Cards will be loaded here by JavaScript -->
@@ -310,6 +322,115 @@
       printRun: 'Promo'
     },
   ];
+
+  function parseCSV(text) {
+    const rows = text.trim().split(/\r?\n/).filter(line => line.trim().length);
+    if (!rows.length) return [];
+
+    const headers = rows.shift().split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(h => h.trim().replace(/^\"|\"$/g, ''));
+    return rows.map(row => {
+      const values = row.split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(v => v.trim().replace(/^\"|\"$/g, ''));
+      const record = {};
+      headers.forEach((header, index) => {
+        record[header] = values[index] || '';
+      });
+      return record;
+    });
+  }
+
+  function normalizeCSVRow(row) {
+    const normalized = {};
+    Object.entries(row).forEach(([key, value]) => {
+      const normalizedKey = key.trim().toLowerCase().replace(/[\s_-]+/g, '');
+      normalized[normalizedKey] = value.trim();
+    });
+
+    return {
+      id: normalized.id ? Number(normalized.id) : Date.now(),
+      category: normalized.category || 'other-sports',
+      number: normalized.number || '',
+      playerName: normalized.playername || normalized.player || '',
+      team: normalized.team || '',
+      year: normalized.year || '',
+      variant: normalized.variant || 'variant-holo',
+      badge: normalized.badge || '',
+      badgeClass: normalized.badgeclass || '',
+      condition: normalized.condition || '',
+      grade: normalized.grade || '',
+      printRun: normalized.printrun || ''
+    };
+  }
+
+  function showCSVMessage(message, isError = false) {
+    const messageEl = document.getElementById('csvMessage');
+    if (!messageEl) return;
+    messageEl.textContent = message;
+    messageEl.style.color = isError ? '#d9534f' : 'var(--muted)';
+  }
+
+  function getGoogleSheetCsvUrl(sheetUrl) {
+    const idMatch = sheetUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    if (!idMatch) return null;
+
+    let gid = '0';
+    const gidMatch = sheetUrl.match(/[?&]gid=(\d+)|#gid=(\d+)/);
+    if (gidMatch) {
+      gid = gidMatch[1] || gidMatch[2] || gid;
+    }
+
+    return `https://docs.google.com/spreadsheets/d/${idMatch[1]}/export?format=csv&gid=${gid}`;
+  }
+
+  async function loadGoogleSheet(sheetUrl) {
+    const csvUrl = getGoogleSheetCsvUrl(sheetUrl);
+    if (!csvUrl) {
+      showCSVMessage('Enter a valid Google Sheet URL.', true);
+      return;
+    }
+
+    showCSVMessage('Loading Google Sheet...');
+    try {
+      const response = await fetch(csvUrl);
+      if (!response.ok) {
+        throw new Error(`Status ${response.status}`);
+      }
+
+      const text = await response.text();
+      const parsed = parseCSV(text);
+      if (!parsed.length) {
+        showCSVMessage('Google Sheet is empty or not formatted correctly.', true);
+        return;
+      }
+
+      const importedCards = parsed.map(normalizeCSVRow);
+      collectionData.splice(0, collectionData.length, ...importedCards);
+      const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
+      renderCards(activeCategory);
+      showCSVMessage(`Loaded ${importedCards.length} cards from Google Sheet.`);
+    } catch (error) {
+      showCSVMessage('Could not load the Google Sheet. Check sharing settings and URL.', true);
+      console.error(error);
+    }
+  }
+
+  const sheetUrlInput = document.getElementById('sheetUrl');
+  const loadSheetBtn = document.getElementById('loadSheetBtn');
+
+  if (loadSheetBtn && sheetUrlInput) {
+    loadSheetBtn.addEventListener('click', () => {
+      const sheetUrl = sheetUrlInput.value.trim();
+      if (sheetUrl) {
+        loadGoogleSheet(sheetUrl);
+      }
+    });
+
+    sheetUrlInput.addEventListener('keypress', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        loadSheetBtn.click();
+      }
+    });
+  }
 
   // Render cards function
   function renderCards(category = 'all') {
