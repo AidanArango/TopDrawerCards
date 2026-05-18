@@ -55,21 +55,21 @@ fadeEls.forEach(el => {
 // ═══════════════════════════════════════════
 
 const categoryBtns = document.querySelectorAll('.category-btn');
-const collectionCards = document.querySelectorAll('.collection-card');
+
+function getCollectionCards() {
+  return document.querySelectorAll('.collection-card');
+}
 
 categoryBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    // Remove active class from all buttons
     categoryBtns.forEach(b => b.classList.remove('active'));
-    // Add active class to clicked button
     btn.classList.add('active');
-    
+
     const selectedCategory = btn.getAttribute('data-category');
-    
-    // Filter cards
-    collectionCards.forEach(card => {
+    const cards = getCollectionCards();
+
+    cards.forEach(card => {
       const cardCategory = card.getAttribute('data-category');
-      
       if (selectedCategory === 'all' || cardCategory === selectedCategory) {
         card.style.display = 'flex';
         setTimeout(() => {
@@ -177,9 +177,127 @@ function loadInstagramPosts() {
 
 // Load posts when DOM is ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadInstagramPosts);
+  document.addEventListener('DOMContentLoaded', () => {
+    loadInstagramPosts();
+    loadLandingSheetCards();
+  });
 } else {
   loadInstagramPosts();
+  loadLandingSheetCards();
+}
+
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1KWbjhpV1tIlLFHY3hpT5g07sq6FsIrkgUmsLcPCOhT8/edit?gid=2110697240#gid=2110697240';
+
+function getGoogleSheetCsvUrl(sheetUrl) {
+  const idMatch = sheetUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+  if (!idMatch) return null;
+
+  let gid = '0';
+  const gidMatch = sheetUrl.match(/[?&]gid=(\d+)|#gid=(\d+)/);
+  if (gidMatch) {
+    gid = gidMatch[1] || gidMatch[2] || gid;
+  }
+
+  return `https://docs.google.com/spreadsheets/d/${idMatch[1]}/export?format=csv&gid=${gid}`;
+}
+
+function parseCSV(text) {
+  const rows = text.trim().split(/\r?\n/).filter(line => line.trim().length);
+  if (!rows.length) return [];
+  const headers = rows.shift().split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(h => h.trim().replace(/^\"|\"$/g, ''));
+  return rows.map(row => {
+    const values = row.split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(v => v.trim().replace(/^\"|\"$/g, ''));
+    const record = {};
+    headers.forEach((header, index) => {
+      record[header.toLowerCase().replace(/[^a-z0-9]/g, '')] = values[index] || '';
+    });
+    return record;
+  });
+}
+
+function normalizeCategoryValue(value) {
+  if (!value) return 'other-sports';
+  return value.toString().trim().toLowerCase().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ');
+}
+
+function normalizeSheetRow(row) {
+  return {
+    id: row.id ? Number(row.id) : Date.now(),
+    category: normalizeCategoryValue(row.category || row.type || row.sport),
+    number: row.number || row.cardnumber || row.id || '',
+    playerName: row.playername || row.player || row.subject || row.name || row.title || 'Untitled',
+    team: row.team || row.set || '',
+    year: row.year || '',
+    badge: row.badge || row.grade || 'RAW',
+    cardTitle: row.cardtitle || row.title || row.printRun || row.category || '',
+    image: row.imageurl || row.image || row.img || '',
+  };
+}
+
+function renderLandingCards(cards) {
+  const scrollTrack = document.getElementById('scrollTrack');
+  if (!scrollTrack) return;
+
+  scrollTrack.innerHTML = cards.map(card => `
+    <div class="collection-card" data-category="${card.category}">
+      <div class="card-slab">
+        <div class="slab-inner slab-variant-1">
+          <div class="card-number">${card.number}</div>
+          <div class="card-image">
+            ${card.image ? `<img src="${card.image}" alt="${card.playerName}" class="collection-card-image">` : '<div class="card-placeholder"></div>'}
+          </div>
+          <div class="card-info">
+            <div class="card-name">${card.playerName}</div>
+            <div class="card-meta">${card.team ? `${card.team} · ${card.year}` : card.year}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-label">
+        <span class="grade-badge">${card.badge}</span>
+        <span class="card-title">${card.cardTitle}</span>
+      </div>
+    </div>
+  `).join('');
+
+  attachLandingCardHoverEffects();
+}
+
+function attachLandingCardHoverEffects() {
+  document.querySelectorAll('.collection-card').forEach(card => {
+    const slab = card.querySelector('.slab-inner');
+    if (!slab) return;
+
+    card.addEventListener('mouseenter', () => {
+      slab.style.transform = 'translateY(-8px) scale(1.02)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      slab.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+}
+
+async function loadLandingSheetCards() {
+  const scrollTrack = document.getElementById('scrollTrack');
+  if (!scrollTrack) return;
+
+  const csvUrl = getGoogleSheetCsvUrl(SHEET_URL);
+  if (!csvUrl) return;
+
+  try {
+    const response = await fetch(csvUrl);
+    if (!response.ok) return;
+
+    const text = await response.text();
+    const parsed = parseCSV(text);
+    if (!parsed.length) return;
+
+    const importedCards = parsed.map(normalizeSheetRow);
+    const recentCards = importedCards.slice(-6);
+    renderLandingCards(recentCards);
+  } catch (error) {
+    console.error('Unable to load landing page cards:', error);
+  }
 }
 
 // ═══════════════════════════════════════════
