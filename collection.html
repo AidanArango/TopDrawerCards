@@ -39,10 +39,6 @@
     <div class="category-filter-wrapper">
       <div class="category-filter">
         <button class="filter-btn active" data-category="all">All</button>
-        <button class="filter-btn" data-category="mens-soccer">Men's Soccer</button>
-        <button class="filter-btn" data-category="womens-soccer">Women's Soccer</button>
-        <button class="filter-btn" data-category="other-sports">Other Sports</button>
-        <button class="filter-btn" data-category="tcg">Trading Cards</button>
       </div>
     </div>
 
@@ -401,6 +397,7 @@
       const importedCards = parsed.map(normalizeCSVRow);
       collectionData.splice(0, collectionData.length, ...importedCards);
       const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
+      renderCategoryButtons(activeCategory);
       renderCards(activeCategory);
     } catch (error) {
       showCSVMessage('Could not load the Google Sheet. Check sharing settings and URL.', true);
@@ -410,6 +407,32 @@
 
   const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1KWbjhpV1tIlLFHY3hpT5g07sq6FsIrkgUmsLcPCOhT8/edit?gid=2110697240#gid=2110697240';
   loadGoogleSheet(SHEET_URL);
+
+  function createCategoryLabel(category) {
+    if (!category || category === 'all') return 'All';
+    return category
+      .replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, char => char.toUpperCase());
+  }
+
+  function renderCategoryButtons(activeCategory = 'all') {
+    const filterContainer = document.querySelector('.category-filter');
+    if (!filterContainer) return;
+
+    const categories = Array.from(new Set(collectionData.map(card => card.category || 'Uncategorized')));
+    filterContainer.innerHTML = '<button class="filter-btn ' + (activeCategory === 'all' ? 'active' : '') + '" data-category="all">All</button>' +
+      categories.map(category => {
+        return `<button class="filter-btn ${activeCategory === category ? 'active' : ''}" data-category="${category}">${createCategoryLabel(category)}</button>`;
+      }).join('');
+
+    filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCards(btn.dataset.category);
+      });
+    });
+  }
 
   // Render cards function
   function renderCards(category = 'all') {
@@ -450,19 +473,8 @@
     });
   }
 
-  // Filter button functionality
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active class from all buttons
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      // Add active class to clicked button
-      btn.classList.add('active');
-      // Render cards for selected category
-      renderCards(btn.dataset.category);
-    });
-  });
-
   // Initial render
+  renderCategoryButtons();
   renderCards();
 </script>
 
