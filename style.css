@@ -549,7 +549,7 @@ section { padding: 100px 24px; }
 
 .card-front {
   width: 100%;
-  min-height: 520px;
+  min-height: 540px;
   border-radius: 26px;
   position: relative;
   overflow: hidden;
@@ -557,16 +557,16 @@ section { padding: 100px 24px; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(180deg, #11121a 0%, #181b26 100%);
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+  background: linear-gradient(135deg, #b81c38 0%, #0b4fa3 100%);
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 26px 70px rgba(0,0,0,.35);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
 .card-front:hover {
   transform: translateY(-6px);
-  box-shadow: 0 28px 70px rgba(0,0,0,.45);
-  border-color: rgba(187,37,51,.35);
+  box-shadow: 0 34px 88px rgba(0,0,0,.4);
+  border-color: rgba(255,255,255,.25);
 }
 
 .fc-stripe {
@@ -575,7 +575,7 @@ section { padding: 100px 24px; }
   left: 0;
   width: 100%;
   height: 6px;
-  background: var(--primary);
+  background: rgba(255,255,255,.9);
 }
 
 .fc-body {
@@ -585,24 +585,24 @@ section { padding: 100px 24px; }
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  gap: 18px;
+  gap: 14px;
 }
 
 .fc-num {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
-  letter-spacing: .14em;
+  font-size: 1.4rem;
+  letter-spacing: .12em;
   color: #fff;
   opacity: .95;
 }
 
 .player-placeholder {
   width: 100%;
-  aspect-ratio: 3 / 2;
-  border-radius: 18px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+  min-height: 320px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.09);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.07);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -616,34 +616,35 @@ section { padding: 100px 24px; }
   height: 100%;
   object-fit: contain;
   display: block;
-  background: #11121a;
+  background: #0e1320;
 }
 
 .player-placeholder .player-title {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 800;
   color: #fff;
   line-height: 1.3;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
 }
 
 .fc-name {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.3;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
 }
 
 .fc-team {
   font-size: 1rem;
-  opacity: .85;
+  color: rgba(255,255,255,.92);
+  opacity: 1;
 }
 
 .fc-serial {
   font-size: .82rem;
-  color: var(--primary);
+  color: rgba(255,255,255,.82);
   letter-spacing: .08em;
   text-transform: uppercase;
 }
