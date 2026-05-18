@@ -324,6 +324,11 @@
     });
   }
 
+  function normalizeCategoryValue(value) {
+    if (!value) return 'other-sports';
+    return value.toString().trim().toLowerCase().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ');
+  }
+
   function normalizeCSVRow(row) {
     const normalized = {};
     Object.entries(row).forEach(([key, value]) => {
@@ -333,7 +338,7 @@
 
     return {
       id: normalized.id ? Number(normalized.id) : Date.now(),
-      category: normalized.category || 'other-sports',
+      category: normalizeCategoryValue(normalized.category) || 'other-sports',
       number: normalized.number || '',
       playerName: normalized.playername || normalized.player || normalized.subject || normalized.name || normalized.title || '',
       team: normalized.team || normalized.set || '',
@@ -419,7 +424,7 @@
     const filterContainer = document.querySelector('.category-filter');
     if (!filterContainer) return;
 
-    const categories = Array.from(new Set(collectionData.map(card => card.category || 'Uncategorized')));
+    const categories = Array.from(new Set(collectionData.map(card => normalizeCategoryValue(card.category || 'Uncategorized'))));
     filterContainer.innerHTML = '<button class="filter-btn ' + (activeCategory === 'all' ? 'active' : '') + '" data-category="all">All</button>' +
       categories.map(category => {
         return `<button class="filter-btn ${activeCategory === category ? 'active' : ''}" data-category="${category}">${createCategoryLabel(category)}</button>`;
@@ -439,9 +444,10 @@
     const cardsGrid = document.getElementById('cardsGrid');
     cardsGrid.innerHTML = '';
 
-    const filteredCards = category === 'all' 
-      ? collectionData 
-      : collectionData.filter(card => card.category === category);
+    const normalizedCategory = normalizeCategoryValue(category);
+    const filteredCards = normalizedCategory === 'all'
+      ? collectionData
+      : collectionData.filter(card => normalizeCategoryValue(card.category) === normalizedCategory);
 
     filteredCards.forEach(card => {
       const cardHTML = `
