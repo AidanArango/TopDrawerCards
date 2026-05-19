@@ -298,9 +298,8 @@ categoryBtns.forEach(btn => {
   });
 });
 
-if (document.getElementById('scrollTrack')) {
-  renderLandingCollectionCards();
-}
+// Do not render landing cards until the Google Sheet data has loaded.
+// Initial shared data starts empty to avoid placeholder content.
 
 // ═══════════════════════════════════════════
 // HORIZONTAL SCROLL NAVIGATION
