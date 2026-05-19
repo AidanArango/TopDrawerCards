@@ -60,6 +60,71 @@ function getCollectionCards() {
   return document.querySelectorAll('.collection-card');
 }
 
+function mapLandingCardCategory(card) {
+  const category = (card.category || '').toLowerCase();
+  if (category.includes('soccer')) return 'soccer';
+  if (category.includes('basketball')) return 'basketball';
+  if (category.includes('football')) return 'football';
+  if (category.includes('baseball')) return 'baseball';
+  if (category.includes('hockey')) return 'hockey';
+
+  const team = (card.team || '').toLowerCase();
+  if (team.includes('lakers') || team.includes('heat') || team.includes('warriors') || team.includes('celtics') || team.includes('boston') || team.includes('miami')) return 'basketball';
+  if (team.includes('chiefs') || team.includes('bills') || team.includes('dolphins') || team.includes('jets') || team.includes('raiders')) return 'football';
+  if (team.includes('dodgers') || team.includes('yankees') || team.includes('mets') || team.includes('cardinals')) return 'baseball';
+  if (team.includes('man city') || team.includes('bayern') || team.includes('psg') || team.includes('real madrid') || team.includes('inter miami') || team.includes('chelsea') || team.includes('uswnt') || team.includes('al nassr')) return 'soccer';
+
+  const name = (card.playerName || '').toLowerCase();
+  if (name.includes('lebron') || name.includes('kobe') || name.includes('jordan')) return 'basketball';
+  if (name.includes('mahomes') || name.includes('brady') || name.includes('manning')) return 'football';
+  if (name.includes('ohtani') || name.includes('robinson') || name.includes('jeter')) return 'baseball';
+  if (name.includes('ronaldo') || name.includes('messi') || name.includes('mbappé') || name.includes('davies') || name.includes('haaland')) return 'soccer';
+
+  return 'all';
+}
+
+function buildLandingCardHTML(card, index) {
+  const variantIndex = (index % 5) + 1;
+  const cardCategory = mapLandingCardCategory(card);
+  const badgeText = card.grade || card.badge || '';
+  const labelText = card.printRun || card.condition || '';
+  const metaText = [card.team, card.year].filter(Boolean).join(' · ');
+
+  return `
+    <div class="collection-card" data-category="${cardCategory}">
+      <div class="card-slab">
+        <div class="slab-inner slab-variant-${variantIndex}">
+          <div class="card-number">${card.number || ''}</div>
+          <div class="card-image">
+            <div class="card-placeholder"></div>
+          </div>
+          <div class="card-info">
+            <div class="card-name">${card.playerName || 'Unknown'}</div>
+            <div class="card-meta">${metaText}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-label">
+        <span class="grade-badge">${badgeText}</span>
+        <span class="card-title">${labelText}</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderLandingCollectionCards(limit = 8) {
+  const track = document.getElementById('scrollTrack');
+  const cards = (window.COLLECTION_DATA || []).slice(0, limit);
+  if (!track || !cards.length) return;
+
+  track.innerHTML = cards.map((card, index) => buildLandingCardHTML(card, index)).join('');
+  const insertedCards = track.querySelectorAll('.collection-card');
+  insertedCards.forEach(card => {
+    card.style.display = 'flex';
+    setTimeout(() => card.classList.add('visible'), 10);
+  });
+}
+
 categoryBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     categoryBtns.forEach(b => b.classList.remove('active'));
@@ -82,6 +147,10 @@ categoryBtns.forEach(btn => {
     });
   });
 });
+
+if (document.getElementById('scrollTrack')) {
+  renderLandingCollectionCards();
+}
 
 // ═══════════════════════════════════════════
 // HORIZONTAL SCROLL NAVIGATION
