@@ -216,15 +216,36 @@ function buildLandingCardHTML(card, index) {
   const badgeText = card.grade || card.badge || '';
   const labelText = card.printRun || card.condition || '';
   const metaText = [card.team, card.year].filter(Boolean).join(' · ');
+  // helper to normalize common Google Drive share links to a direct image URL
+  function normalizeImageUrl(url) {
+    if (!url) return '';
+    try {
+      const trimmed = url.trim();
+      // drive file link: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+      const m = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m && m[1]) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+      // open?id=FILE_ID
+      const m2 = trimmed.match(/open\?id=([a-zA-Z0-9_-]+)/);
+      if (m2 && m2[1]) return `https://drive.google.com/uc?export=view&id=${m2[1]}`;
+      // direct img URLs or hosting already OK
+      return trimmed;
+    } catch (e) {
+      return url;
+    }
+  }
+
+  const imgUrl = normalizeImageUrl(card.image || card.imageurl || card.img || '');
+
+  const imageHTML = imgUrl
+    ? `<img src="${imgUrl}" alt="${(card.playerName||'card')}" class="landing-card-image" onerror="this.style.display='none'">`
+    : `<div class="card-placeholder"></div>`;
 
   return `
     <div class="collection-card" data-category="${cardCategory}">
       <div class="card-slab">
         <div class="slab-inner slab-variant-${variantIndex}">
           <div class="card-number">${card.number || ''}</div>
-          <div class="card-image">
-            <div class="card-placeholder"></div>
-          </div>
+          <div class="card-image">${imageHTML}</div>
           <div class="card-info">
             <div class="card-name">${card.playerName || 'Unknown'}</div>
             <div class="card-meta">${metaText}</div>
@@ -241,7 +262,9 @@ function buildLandingCardHTML(card, index) {
 
 function renderLandingCollectionCards(limit = 8) {
   const track = document.getElementById('scrollTrack');
-  const cards = (window.COLLECTION_DATA || []).slice(0, limit);
+  const all = window.COLLECTION_DATA || [];
+  // show the most recent sheet rows first — assume later rows are newer
+  const cards = all.length <= limit ? all.slice().reverse() : all.slice(-limit).reverse();
   if (!track || !cards.length) return;
 
   track.innerHTML = cards.map((card, index) => buildLandingCardHTML(card, index)).join('');
