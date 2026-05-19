@@ -51,6 +51,133 @@ fadeEls.forEach(el => {
 });
 
 // ═══════════════════════════════════════════
+// GOOGLE SHEET COLLECTION LOADER
+// ═══════════════════════════════════════════
+
+function parseCSV(text) {
+  const rows = text.trim().split(/\r?\n/).filter(line => line.trim().length);
+  if (!rows.length) return [];
+
+  const headers = rows.shift().split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(h => h.trim().replace(/^\"|\"$/g, ''));
+  return rows.map(row => {
+    const values = row.split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(v => v.trim().replace(/^\"|\"$/g, ''));
+    const record = {};
+    headers.forEach((header, index) => {
+      record[header] = values[index] || '';
+    });
+    return record;
+  });
+}
+
+function normalizeCategoryValue(value) {
+  if (!value) return 'other-sports';
+  return value.toString().trim().toLowerCase().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ');
+}
+
+function normalizeCSVRow(row) {
+  const normalized = {};
+  Object.entries(row).forEach(([key, value]) => {
+    const normalizedKey = key.trim().toLowerCase().replace(/[\s_-]+/g, '');
+    normalized[normalizedKey] = value.trim();
+  });
+
+  return {
+    id: normalized.id ? Number(normalized.id) : Date.now(),
+    category: normalizeCategoryValue(normalized.category) || 'other-sports',
+    number: normalized.number || '',
+    playerName: normalized.playername || normalized.player || normalized.subject || normalized.name || normalized.title || '',
+    team: normalized.team || normalized.set || '',
+    year: normalized.year || '',
+    variant: normalized.variant || 'variant-holo',
+    badge: normalized.badge || '',
+    badgeClass: normalized.badgeclass || '',
+    condition: normalized.condition || '',
+    grade: normalized.grade || '',
+    printRun: normalized.printrun || '',
+    image: normalized.image || normalized.img || normalized.imageurl || ''
+  };
+}
+
+function showCSVMessage(message, isError = false) {
+  const messageEl = document.getElementById('sheetStatus');
+  if (!messageEl) return;
+  if (!message) {
+    messageEl.style.display = 'none';
+    messageEl.textContent = '';
+    return;
+  }
+  messageEl.textContent = message;
+  messageEl.style.color = isError ? '#d9534f' : 'var(--muted)';
+  messageEl.style.display = 'block';
+}
+
+function getGoogleSheetCsvUrl(sheetUrl) {
+  const idMatch = sheetUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
+  if (!idMatch) return null;
+
+  let gid = '0';
+  const gidMatch = sheetUrl.match(/[?&]gid=(\d+)|#gid=(\d+)/);
+  if (gidMatch) {
+    gid = gidMatch[1] || gidMatch[2] || gid;
+  }
+
+  return `https://docs.google.com/spreadsheets/d/${idMatch[1]}/export?format=csv&gid=${gid}`;
+}
+
+async function loadGoogleSheet(sheetUrl) {
+  if (!sheetUrl || window.COLLECTION_DATA_LOADER_STARTED) return;
+  window.COLLECTION_DATA_LOADER_STARTED = true;
+
+  const csvUrl = getGoogleSheetCsvUrl(sheetUrl);
+  if (!csvUrl) {
+    showCSVMessage('Could not determine sheet CSV URL.', true);
+    return;
+  }
+
+  showCSVMessage('');
+  try {
+    const response = await fetch(csvUrl);
+    if (!response.ok) {
+      throw new Error(`Status ${response.status}`);
+    }
+
+    const text = await response.text();
+    const parsed = parseCSV(text);
+    if (!parsed.length) {
+      showCSVMessage('Google Sheet is empty or not formatted correctly.', true);
+      return;
+    }
+
+    const importedCards = parsed.map(normalizeCSVRow);
+    if (!Array.isArray(window.COLLECTION_DATA)) {
+      window.COLLECTION_DATA = [];
+    }
+    window.COLLECTION_DATA.length = 0;
+    window.COLLECTION_DATA.push(...importedCards);
+
+    if (typeof window.onCollectionDataLoaded === 'function') {
+      window.onCollectionDataLoaded();
+    }
+  } catch (error) {
+    showCSVMessage('Could not load the Google Sheet. Check sharing settings and URL.', true);
+    console.error(error);
+  }
+}
+
+window.onCollectionDataLoaded = () => {
+  if (typeof renderLandingCollectionCards === 'function') {
+    renderLandingCollectionCards();
+  }
+  if (typeof renderCards === 'function') {
+    renderCards(document.querySelector('.filter-btn.active')?.dataset.category || 'all');
+  }
+};
+
+if (window.COLLECTION_SHEET_URL) {
+  loadGoogleSheet(window.COLLECTION_SHEET_URL);
+}
+
+// ═══════════════════════════════════════════
 // CATEGORY FILTERING
 // ═══════════════════════════════════════════
 
