@@ -218,6 +218,21 @@
       }
     });
 
+    // helper to normalize common Google Drive share links to a direct image URL
+    function normalizeImageUrl(url) {
+      if (!url) return '';
+      try {
+        const trimmed = url.trim();
+        const m = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (m && m[1]) return `https://drive.google.com/uc?export=view&id=${m[1]}`;
+        const m2 = trimmed.match(/open\?id=([a-zA-Z0-9_-]+)/);
+        if (m2 && m2[1]) return `https://drive.google.com/uc?export=view&id=${m2[1]}`;
+        return trimmed;
+      } catch (e) {
+        return url;
+      }
+    }
+
     uniqueCards.forEach(card => {
       const cardHTML = `
         <div class="card-item">
@@ -225,7 +240,7 @@
             <div class="fc-stripe"></div>
             <div class="fc-body">
               <div class="player-placeholder">
-                ${card.image ? `<img src="${card.image}" alt="${card.playerName}" class="player-image">` : `<span class="player-title">${card.playerName}</span>`}
+                ${card.image ? `<img src="${normalizeImageUrl(card.image)}" alt="${card.playerName}" class="player-image" onerror="this.style.display='none'">` : `<span class="player-title">${card.playerName}</span>`}
               </div>
               <div class="fc-num">${card.number}</div>
             </div>
