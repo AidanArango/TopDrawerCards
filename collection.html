@@ -207,16 +207,34 @@
       ? collectionData
       : collectionData.filter(card => normalizeCategoryValue(card.category) === normalizedCategory);
 
-    // Deduplicate cards by `id` when present, otherwise fallback to player/team/year composite key.
+    // Deduplicate cards only when rows are truly identical.
     const seen = new Set();
     const uniqueCards = [];
     filteredCards.forEach(card => {
-      const key = card.id || `${(card.playerName||'').trim().toLowerCase()}|${(card.team||'').trim().toLowerCase()}|${(card.year||'').trim()}`;
+      const key = card.id
+        ? `id:${card.id}`
+        : [card.playerName, card.team, card.year, card.number, card.grade, card.printRun, card.image]
+            .map(value => (value || '').toString().trim().toLowerCase())
+            .join('|');
       if (!seen.has(key)) {
         seen.add(key);
         uniqueCards.push(card);
       }
     });
+
+    function normalizeImageUrl(url) {
+      if (!url) return '';
+      try {
+        const trimmed = url.trim();
+        const driveMatch = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (driveMatch && driveMatch[1]) return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+        const openMatch = trimmed.match(/open\?id=([a-zA-Z0-9_-]+)/);
+        if (openMatch && openMatch[1]) return `https://drive.google.com/uc?export=view&id=${openMatch[1]}`;
+        return trimmed;
+      } catch (e) {
+        return url;
+      }
+    }
 
     uniqueCards.forEach(card => {
       const cardHTML = `
@@ -225,7 +243,7 @@
             <div class="fc-stripe"></div>
             <div class="fc-body">
               <div class="player-placeholder">
-                ${card.image ? `<img src="${card.image}" alt="${card.playerName}" class="player-image">` : `<span class="player-title">${card.playerName}</span>`}
+                ${card.image ? `<img src="${normalizeImageUrl(card.image)}" alt="${card.playerName}" class="player-image">` : `<span class="player-title">${card.playerName}</span>`}
               </div>
               <div class="fc-num">${card.number}</div>
             </div>
