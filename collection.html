@@ -207,7 +207,18 @@
       ? collectionData
       : collectionData.filter(card => normalizeCategoryValue(card.category) === normalizedCategory);
 
+    // Deduplicate cards by `id` when present, otherwise fallback to player/team/year composite key.
+    const seen = new Set();
+    const uniqueCards = [];
     filteredCards.forEach(card => {
+      const key = card.id || `${(card.playerName||'').trim().toLowerCase()}|${(card.team||'').trim().toLowerCase()}|${(card.year||'').trim()}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueCards.push(card);
+      }
+    });
+
+    uniqueCards.forEach(card => {
       const cardHTML = `
         <div class="card-item">
           <div class="card-front ${card.variant}">
