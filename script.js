@@ -74,7 +74,7 @@ function normalizeCategoryValue(value) {
   return value.toString().trim().toLowerCase().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ');
 }
 
-function normalizeCSVRow(row) {
+function normalizeCSVRow(row, index) {
   const normalized = {};
   Object.entries(row).forEach(([key, value]) => {
     const normalizedKey = key.trim().toLowerCase().replace(/[\s_-]+/g, '');
@@ -82,7 +82,7 @@ function normalizeCSVRow(row) {
   });
 
   return {
-    id: normalized.id ? Number(normalized.id) : Date.now(),
+    id: normalized.id ? Number(normalized.id) : index,
     category: normalizeCategoryValue(normalized.category) || 'other-sports',
     number: normalized.number || '',
     playerName: normalized.playername || normalized.player || normalized.subject || normalized.name || normalized.title || '',
@@ -148,7 +148,7 @@ async function loadGoogleSheet(sheetUrl) {
       return;
     }
 
-    const importedCards = parsed.map(normalizeCSVRow);
+    const importedCards = parsed.map((row, index) => normalizeCSVRow(row, index));
     if (!Array.isArray(window.COLLECTION_DATA)) {
       window.COLLECTION_DATA = [];
     }
