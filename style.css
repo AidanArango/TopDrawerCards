@@ -800,11 +800,25 @@ section { padding: 100px 24px; }
 }
 
 .card-image {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  max-height: 220px;
+  overflow: hidden;
+}
+
+/* Ensure card images do not grow past the slab and push details out */
+.card-image img,
+.collection-card-image,
+.landing-card-image {
+  max-height: 210px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
 .card-placeholder {
