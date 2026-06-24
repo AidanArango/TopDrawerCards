@@ -357,14 +357,11 @@ section { padding: 100px 24px; }
   width: 100%;
   padding: 0;
   overflow: hidden;
-  min-height: 420px;
-  background: url("images/banner.jpg") center / cover no-repeat;
 }
 
 .banner-img {
   width: 100%;
-  max-height: 420px;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
