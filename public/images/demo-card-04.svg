@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="700" viewBox="0 0 500 700" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="40" y1="30" x2="465" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CFD8DE"/>
+      <stop offset=".5" stop-color="#7891A0"/>
+      <stop offset="1" stop-color="#243B4A"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="170" y1="355" x2="326" y2="624" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#24364B"/>
+      <stop offset="1" stop-color="#101D2D"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="12" width="476" height="676" rx="26" fill="#F5E9D7"/>
+  <rect x="24" y="24" width="452" height="652" rx="20" fill="url(#bg)"/>
+  <path d="m53 434 95-123 68 70 68-110 160 185" stroke="#F5E9D7" stroke-opacity=".28" stroke-width="3"/>
+  <path d="M38 493c86-71 161-72 226-28 60 41 118 36 221-33v244H38V493Z" fill="#263F42"/>
+  <circle cx="251" cy="254" r="93" fill="#E0B79B"/>
+  <path d="M157 253c0-76 35-126 98-129 66-3 103 48 100 129-20-20-34-47-40-77-31 31-80 47-158 45Z" fill="#211D1B"/>
+  <path d="M152 371c28-33 63-49 101-49 40 0 75 17 103 51l50 248H101l51-250Z" fill="url(#shirt)"/>
+  <path d="m157 374 47-34 50 31 48-31 54 37-41 64H195l-38-67Z" fill="#0066B2"/>
+  <path d="M232 346h38l-8 39h-23l-7-39Z" fill="#DDB295"/>
+  <circle cx="251" cy="550" r="47" fill="#F5E9D7"/>
+  <path d="m251 517 11 22 25 4-18 17 4 25-22-12-23 12 4-25-18-17 25-4 12-22Z" fill="#0066B2"/>
+  <text x="50" y="68" fill="#FFF8EC" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="3">TDC · DEMO ARTWORK</text>
+  <text x="50" y="644" fill="#FFF8EC" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">SAMPLE CARD · NOT A REAL CARD</text>
+</svg>
